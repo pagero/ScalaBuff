@@ -77,7 +77,7 @@ object FieldTypes extends Enum {
 	 * @param isMessage whether the field is a Message
 	 */
 	trait EnumVal extends Value {
-	    import com.google.protobuf.WireFormat._
+	    import com.google.protobuf2.WireFormat._
 		var name: String
 		var scalaType: String
 		var defaultValue: String
@@ -100,7 +100,7 @@ object FieldTypes extends Enum {
 		def wireType_=(wireType: Int) {}
 	}
 
-	import com.google.protobuf.WireFormat._
+	import com.google.protobuf2.WireFormat._
 
 	val INT32 = PredefinedEnumVal("Int32", "Int", "0", WIRETYPE_VARINT)
 	val UINT32 = PredefinedEnumVal("UInt32", "Int", "0", WIRETYPE_VARINT)
@@ -115,7 +115,7 @@ object FieldTypes extends Enum {
 	val BOOL = PredefinedEnumVal("Bool", "Boolean", "false", WIRETYPE_VARINT)
 	val FLOAT = PredefinedEnumVal("Float", "Float", "0.0f", WIRETYPE_FIXED32)
 	val DOUBLE = PredefinedEnumVal("Double", "Double", "0.0", WIRETYPE_FIXED64)
-	val BYTES = PredefinedEnumVal("Bytes", "com.google.protobuf.ByteString", "com.google.protobuf.ByteString.EMPTY", WIRETYPE_LENGTH_DELIMITED)
+	val BYTES = PredefinedEnumVal("Bytes", "com.google.protobuf2.ByteString", "com.google.protobuf2.ByteString.EMPTY", WIRETYPE_LENGTH_DELIMITED)
 	val STRING = PredefinedEnumVal("String", "String", "\"\"", WIRETYPE_LENGTH_DELIMITED)
 
 	/**

@@ -3,7 +3,7 @@ package net.sandrogrzicic.scalabuff.compiler
 import annotation.tailrec
 import collection.mutable
 import net.sandrogrzicic.scalabuff.compiler.FieldTypes._
-import com.google.protobuf._
+import com.google.protobuf2._
 import java.io.File
 
 /**
@@ -80,7 +80,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
       }
 
       // internalGetValueMap
-      out.append(indent).append("val internalGetValueMap = new com.google.protobuf.Internal.EnumLiteMap[EnumVal] {\n")
+      out.append(indent).append("val internalGetValueMap = new com.google.protobuf2.Internal.EnumLiteMap[EnumVal] {\n")
         .append(indent).append("\tdef findValueByNumber(id: Int): EnumVal = valueOf(id)\n")
         .append(indent).append("}\n")
 
@@ -134,11 +134,11 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
       }
       if (!fields.isEmpty) out.length -= 2
 
-      out.append('\n').append(indent0).append(") extends com.google.protobuf.")
+      out.append('\n').append(indent0).append(") extends com.google.protobuf2.")
       if (!hasExtensionRanges) {
         // normal message
         out.append("GeneratedMessageLite")
-        out.append('\n').append(indent1).append("with com.google.protobuf.MessageLite.Builder")
+        out.append('\n').append(indent1).append("with com.google.protobuf2.MessageLite.Builder")
         out.append('\n').append(indent1).append("with net.sandrogrzicic.scalabuff.Message[").append(name).append("]")
       } else {
         // extendable message
@@ -182,7 +182,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
 
       // writeTo(CodedOutputStream)
       out.append("\n").append(indent1)
-        .append("def writeTo(output: com.google.protobuf.CodedOutputStream) {\n")
+        .append("def writeTo(output: com.google.protobuf2.CodedOutputStream) {\n")
 
       fields.foreach { field =>
         field.label match {
@@ -198,7 +198,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
               case (true, Some(option)) =>
                 out.append(indent2).append(s"// write field ${field.name} packed \n")
                 out.append(indent2).append("if (!").append(field.name.toScalaIdent).append(".isEmpty) {\n")
-                out.append(indent3).append("import com.google.protobuf.CodedOutputStream._\n")
+                out.append(indent3).append("import com.google.protobuf2.CodedOutputStream._\n")
                 out.append(indent3).append("val dataSize = ").append(field.name.toScalaIdent)
                   .append(".map(compute").append(field.fType.name).append("SizeNoTag(_)).sum")
                   .append(" \n")
@@ -223,7 +223,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
 
       // getSerializedSize
       out.append("\n").append(indent1).append("def getSerializedSize = {\n")
-        .append(indent2).append("import com.google.protobuf.CodedOutputStream._\n")
+        .append(indent2).append("import com.google.protobuf2.CodedOutputStream._\n")
         .append(indent2).append("var __size = 0\n")
       for (field <- fields) {
         field.label match {
@@ -261,9 +261,9 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
       // mergeFrom(CodedInputStream, ExtensionRegistryLite)
       // need to split this into 2 versions: optimize for speed (current code) and for code size (use setters, generating new Messages each time)
       out.append("\n").append(indent1)
-        .append("def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): ")
+        .append("def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): ")
         .append(name).append(" = {\n")
-        .append(indent2).append("import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}\n")
+        .append(indent2).append("import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}\n")
 
       for (field <- fields) {
         field.label match {
@@ -388,7 +388,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
         .append(indent1).append("def buildPartial = this\n")
 
       out.append(indent1)
-        .append("def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = ")
+        .append("def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = ")
         .append("mergeFrom(cis, er)\n")
 
       out.append(indent1).append("override def getParserForType = this\n")
@@ -462,7 +462,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
         .append(" = defaultInstance.mergeFrom(data)\n")
       out.append(indent1).append("def parseFrom(data: Array[Byte], offset: Int, length: Int): ").append(name)
         .append(" = defaultInstance.mergeFrom(data, offset, length)\n")
-      out.append(indent1).append("def parseFrom(byteString: com.google.protobuf.ByteString): ").append(name)
+      out.append(indent1).append("def parseFrom(byteString: com.google.protobuf2.ByteString): ").append(name)
         .append(" = defaultInstance.mergeFrom(byteString)\n")
       out.append(indent1).append("def parseFrom(stream: java.io.InputStream): ").append(name)
         .append(" = defaultInstance.mergeFrom(stream)\n")
@@ -593,15 +593,15 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
     // outer object
     output
       .append("object ").append(className).append(" {\n")
-      .append("\tdef registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {\n")
+      .append("\tdef registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {\n")
       .append("\t}\n\n")
 
-      .append("\tprivate val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](").append("\n")
+      .append("\tprivate val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](").append("\n")
       .append(messageNames.map { m => "\t\t" + s""" "$m" -> (bytes ⇒ $m.parseFrom(bytes))""" } mkString ",\n")
       .append("\n\t)").append("\n")
 
       .append("\n")
-      .append("\tdef deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {").append("\n")
+      .append("\tdef deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {").append("\n")
       .append("\t\tfromBinaryHintMap.get(payloadType) match {").append("\n")
       .append("\t\t\tcase Some(f) ⇒ f(payload)").append("\n")
       .append("\t\t\tcase None    ⇒ throw new IllegalArgumentException(s\"unimplemented deserialization of message payload of type [${payloadType}]\")").append("\n")

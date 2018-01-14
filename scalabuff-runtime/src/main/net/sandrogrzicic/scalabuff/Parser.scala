@@ -1,15 +1,15 @@
 package net.sandrogrzicic.scalabuff
 
-import com.google.protobuf._
+import com.google.protobuf2._
 import java.io.IOException
 import java.io.InputStream
 
 /**
- * Trait which implements most of the com.google.protobuf.Parser interface methods.
+ * Trait which implements most of the com.google.protobuf2.Parser interface methods.
  *
  * @author Sandro Gržičić
  */
-trait Parser[MessageType <: MessageLite] extends com.google.protobuf.Parser[MessageType] {
+trait Parser[MessageType <: MessageLite] extends com.google.protobuf2.Parser[MessageType] {
   import Parser.EMPTY_REGISTRY
   
   private def checkMessageInitialized(message: MessageType): MessageType = {

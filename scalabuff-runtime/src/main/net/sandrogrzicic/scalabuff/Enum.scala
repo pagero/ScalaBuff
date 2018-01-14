@@ -31,7 +31,7 @@ trait Enum {
 	 */
 	def values: Vector[EnumVal] = _values.get
 
-	protected trait Value extends com.google.protobuf.Internal.EnumLite {
+	protected trait Value extends com.google.protobuf2.Internal.EnumLite {
 		self: EnumVal => // Enforce that no one mixes in Value in a non-EnumVal type
 		final val ordinal = addEnumVal(this) // Adds the EnumVal and returns the ordinal
 

@@ -1,6 +1,6 @@
 package net.sandrogrzicic.scalabuff
 
-import com.google.protobuf._
+import com.google.protobuf2._
 
 /**
  * Message trait for extendable messages generated with ScalaBuff.

@@ -3,7 +3,7 @@ package net.sandrogrzicic.scalabuff
 import java.io.{FilterInputStream, InputStream}
 
 /**
- * See {@link com.google.protobuf.AbstractMessageLite.Builder#LimitedInputStream}.
+ * See {@link com.google.protobuf2.AbstractMessageLite.Builder#LimitedInputStream}.
  */
 final class LimitedInputStream(
     val inputStream: InputStream, private var limit: Int

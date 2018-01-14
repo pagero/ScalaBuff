@@ -1,6 +1,6 @@
 package net.sandrogrzicic.scalabuff
 
-import com.google.protobuf.{ExtensionRegistryLite, CodedInputStream, ByteString}
+import com.google.protobuf2.{ExtensionRegistryLite, CodedInputStream, ByteString}
 import java.io.InputStream
 import scala.language.implicitConversions
 
@@ -112,7 +112,7 @@ trait MessageBuilder[MessageType] {
 
 
   /**
-   * See {@link com.google.protobuf.CodedInputStream#readMessage}.
+   * See {@link com.google.protobuf2.CodedInputStream#readMessage}.
    *
    * CodedInputStream#readMessage attempts to mutate the passed Builder and discards the returned value,
    * which we need, since our "Builders" (Messages) return a new instance whenever a mutation is performed.

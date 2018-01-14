@@ -22,7 +22,7 @@ object ScalaBuffBuild extends Build {
 	lazy val buildSettings = Seq(
 		name := "ScalaBuff",
 		organization := "net.sandrogrzicic",
-		version := "1.4.0",
+		version := "1.4.0-1-pb2",
 		scalaVersion := "2.11.4",
 		logLevel := Level.Info
 	)
@@ -44,7 +44,7 @@ object ScalaBuffBuild extends Build {
 		),
 		
 		libraryDependencies ++= Seq(
-			"com.google.protobuf" % "protobuf-java" % "2.5.0",
+			"com.google.protobuf2" % "protobuf-java" % "2.5.0-pb2",
       "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 		) ++
 		  (CrossVersion.partialVersion(scalaVersion.value) match {
