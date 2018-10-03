@@ -18,31 +18,38 @@ object ComputerPeripherals extends net.sandrogrzicic.scalabuff.Enum {
 		case 2 => MOUSE
 		case _default => throw new net.sandrogrzicic.scalabuff.UnknownEnumException(_default)
 	}
-	val internalGetValueMap = new com.google.protobuf.Internal.EnumLiteMap[EnumVal] {
+	val internalGetValueMap = new com.google.protobuf2.Internal.EnumLiteMap[EnumVal] {
 		def findValueByNumber(id: Int): EnumVal = valueOf(id)
 	}
 }
 final case class MyPeripherals (
 	`primaryPeripheral`: Option[ComputerPeripherals.EnumVal] = Some(ComputerPeripherals.KEYBOARD),
 	`secondaryPeripheral`: Option[ComputerPeripherals.EnumVal] = None
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[MyPeripherals]
 	with net.sandrogrzicic.scalabuff.Parser[MyPeripherals] {
 
-	def setPrimaryPeripheral(_f: ComputerPeripherals.EnumVal) = copy(`primaryPeripheral` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setPrimaryPeripheral(_f: ComputerPeripherals.EnumVal) = copy(`primaryPeripheral` = Some(_f))
 	def setSecondaryPeripheral(_f: ComputerPeripherals.EnumVal) = copy(`secondaryPeripheral` = Some(_f))
 
 	def clearPrimaryPeripheral = copy(`primaryPeripheral` = None)
 	def clearSecondaryPeripheral = copy(`secondaryPeripheral` = None)
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		if (`primaryPeripheral`.isDefined) output.writeEnum(1, `primaryPeripheral`.get)
 		if (`secondaryPeripheral`.isDefined) output.writeEnum(2, `secondaryPeripheral`.get)
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		if (`primaryPeripheral`.isDefined) __size += computeEnumSize(1, `primaryPeripheral`.get)
 		if (`secondaryPeripheral`.isDefined) __size += computeEnumSize(2, `secondaryPeripheral`.get)
@@ -50,8 +57,8 @@ final case class MyPeripherals (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): MyPeripherals = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): MyPeripherals = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __primaryPeripheral: Option[ComputerPeripherals.EnumVal] = `primaryPeripheral`
 		var __secondaryPeripheral: Option[ComputerPeripherals.EnumVal] = `secondaryPeripheral`
 
@@ -80,7 +87,7 @@ final case class MyPeripherals (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -104,7 +111,7 @@ object MyPeripherals {
 
 	def parseFrom(data: Array[Byte]): MyPeripherals = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): MyPeripherals = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): MyPeripherals = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): MyPeripherals = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): MyPeripherals = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[MyPeripherals] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -119,12 +126,19 @@ final case class Outer (
 	`innerRequired`: Outer.Inner.EnumVal = Outer.Inner._UNINITIALIZED,
 	`innerOptional`: Option[Outer.Inner.EnumVal] = Some(Outer.Inner.FIRST),
 	`innerRepeated`: scala.collection.immutable.Seq[Outer.Inner.EnumVal] = Vector.empty[Outer.Inner.EnumVal]
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[Outer]
 	with net.sandrogrzicic.scalabuff.Parser[Outer] {
 
-	def setInnerOptional(_f: Outer.Inner.EnumVal) = copy(`innerOptional` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setInnerOptional(_f: Outer.Inner.EnumVal) = copy(`innerOptional` = Some(_f))
 	def setInnerRepeated(_i: Int, _v: Outer.Inner.EnumVal) = copy(`innerRepeated` = `innerRepeated`.updated(_i, _v))
 	def addInnerRepeated(_f: Outer.Inner.EnumVal) = copy(`innerRepeated` = `innerRepeated` :+ _f)
 	def addAllInnerRepeated(_f: Outer.Inner.EnumVal*) = copy(`innerRepeated` = `innerRepeated` ++ _f)
@@ -133,14 +147,14 @@ final case class Outer (
 	def clearInnerOptional = copy(`innerOptional` = None)
 	def clearInnerRepeated = copy(`innerRepeated` = Vector.empty[Outer.Inner.EnumVal])
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeEnum(1, `innerRequired`)
 		if (`innerOptional`.isDefined) output.writeEnum(2, `innerOptional`.get)
 		for (_v <- `innerRepeated`) output.writeEnum(3, _v)
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeEnumSize(1, `innerRequired`)
 		if (`innerOptional`.isDefined) __size += computeEnumSize(2, `innerOptional`.get)
@@ -149,8 +163,8 @@ final case class Outer (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): Outer = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): Outer = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __innerRequired: Outer.Inner.EnumVal = Outer.Inner._UNINITIALIZED
 		var __innerOptional: Option[Outer.Inner.EnumVal] = `innerOptional`
 		val __innerRepeated: scala.collection.mutable.Buffer[Outer.Inner.EnumVal] = `innerRepeated`.toBuffer
@@ -190,7 +204,7 @@ final case class Outer (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -215,7 +229,7 @@ object Outer {
 
 	def parseFrom(data: Array[Byte]): Outer = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): Outer = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): Outer = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): Outer = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): Outer = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[Outer] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -241,7 +255,7 @@ object Outer {
 			case 2 => SECOND
 			case _default => throw new net.sandrogrzicic.scalabuff.UnknownEnumException(_default)
 		}
-		val internalGetValueMap = new com.google.protobuf.Internal.EnumLiteMap[EnumVal] {
+		val internalGetValueMap = new com.google.protobuf2.Internal.EnumLiteMap[EnumVal] {
 			def findValueByNumber(id: Int): EnumVal = valueOf(id)
 		}
 	}
@@ -251,12 +265,19 @@ final case class OuterDuplicate (
 	`innerRequired`: OuterDuplicate.Inner.EnumVal = OuterDuplicate.Inner._UNINITIALIZED,
 	`innerOptional`: Option[OuterDuplicate.Inner.EnumVal] = Some(OuterDuplicate.Inner.SECOND),
 	`innerRepeated`: scala.collection.immutable.Seq[OuterDuplicate.Inner.EnumVal] = Vector.empty[OuterDuplicate.Inner.EnumVal]
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[OuterDuplicate]
 	with net.sandrogrzicic.scalabuff.Parser[OuterDuplicate] {
 
-	def setInnerOptional(_f: OuterDuplicate.Inner.EnumVal) = copy(`innerOptional` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setInnerOptional(_f: OuterDuplicate.Inner.EnumVal) = copy(`innerOptional` = Some(_f))
 	def setInnerRepeated(_i: Int, _v: OuterDuplicate.Inner.EnumVal) = copy(`innerRepeated` = `innerRepeated`.updated(_i, _v))
 	def addInnerRepeated(_f: OuterDuplicate.Inner.EnumVal) = copy(`innerRepeated` = `innerRepeated` :+ _f)
 	def addAllInnerRepeated(_f: OuterDuplicate.Inner.EnumVal*) = copy(`innerRepeated` = `innerRepeated` ++ _f)
@@ -265,14 +286,14 @@ final case class OuterDuplicate (
 	def clearInnerOptional = copy(`innerOptional` = None)
 	def clearInnerRepeated = copy(`innerRepeated` = Vector.empty[OuterDuplicate.Inner.EnumVal])
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeEnum(1, `innerRequired`)
 		if (`innerOptional`.isDefined) output.writeEnum(2, `innerOptional`.get)
 		for (_v <- `innerRepeated`) output.writeEnum(3, _v)
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeEnumSize(1, `innerRequired`)
 		if (`innerOptional`.isDefined) __size += computeEnumSize(2, `innerOptional`.get)
@@ -281,8 +302,8 @@ final case class OuterDuplicate (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): OuterDuplicate = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): OuterDuplicate = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __innerRequired: OuterDuplicate.Inner.EnumVal = OuterDuplicate.Inner._UNINITIALIZED
 		var __innerOptional: Option[OuterDuplicate.Inner.EnumVal] = `innerOptional`
 		val __innerRepeated: scala.collection.mutable.Buffer[OuterDuplicate.Inner.EnumVal] = `innerRepeated`.toBuffer
@@ -322,7 +343,7 @@ final case class OuterDuplicate (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -347,7 +368,7 @@ object OuterDuplicate {
 
 	def parseFrom(data: Array[Byte]): OuterDuplicate = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): OuterDuplicate = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): OuterDuplicate = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): OuterDuplicate = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): OuterDuplicate = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[OuterDuplicate] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -373,7 +394,7 @@ object OuterDuplicate {
 			case 2 => SECOND
 			case _default => throw new net.sandrogrzicic.scalabuff.UnknownEnumException(_default)
 		}
-		val internalGetValueMap = new com.google.protobuf.Internal.EnumLiteMap[EnumVal] {
+		val internalGetValueMap = new com.google.protobuf2.Internal.EnumLiteMap[EnumVal] {
 			def findValueByNumber(id: Int): EnumVal = valueOf(id)
 		}
 	}
@@ -381,27 +402,34 @@ object OuterDuplicate {
 }
 final case class OuterEnumContainer (
 	`innerMessage`: OuterEnumContainer.InnerEnumContainer = OuterEnumContainer.InnerEnumContainer.defaultInstance
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[OuterEnumContainer]
 	with net.sandrogrzicic.scalabuff.Parser[OuterEnumContainer] {
 
+	
 
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+          
+
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeMessage(1, `innerMessage`)
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeMessageSize(1, `innerMessage`)
 
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): OuterEnumContainer = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): OuterEnumContainer = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __innerMessage: OuterEnumContainer.InnerEnumContainer = OuterEnumContainer.InnerEnumContainer.defaultInstance
 
 		def __newMerged = OuterEnumContainer(
@@ -426,7 +454,7 @@ final case class OuterEnumContainer (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -449,7 +477,7 @@ object OuterEnumContainer {
 
 	def parseFrom(data: Array[Byte]): OuterEnumContainer = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): OuterEnumContainer = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): OuterEnumContainer = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): OuterEnumContainer = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): OuterEnumContainer = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[OuterEnumContainer] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -460,27 +488,34 @@ object OuterEnumContainer {
 
 	final case class InnerEnumContainer (
 		`someEnum`: InnerEnumContainer.SomeEnum.EnumVal = InnerEnumContainer.SomeEnum._UNINITIALIZED
-	) extends com.google.protobuf.GeneratedMessageLite
-		with com.google.protobuf.MessageLite.Builder
+	) extends com.google.protobuf2.GeneratedMessageLite
+		with com.google.protobuf2.MessageLite.Builder
 		with net.sandrogrzicic.scalabuff.Message[InnerEnumContainer]
 		with net.sandrogrzicic.scalabuff.Parser[InnerEnumContainer] {
 
+		
 
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
 
-		def writeTo(output: com.google.protobuf.CodedOutputStream) {
+          
+
+		def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 			output.writeEnum(1, `someEnum`)
 		}
 
 		def getSerializedSize = {
-			import com.google.protobuf.CodedOutputStream._
+			import com.google.protobuf2.CodedOutputStream._
 			var __size = 0
 			__size += computeEnumSize(1, `someEnum`)
 
 			__size
 		}
 
-		def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): InnerEnumContainer = {
-			import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+		def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): InnerEnumContainer = {
+			import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 			var __someEnum: InnerEnumContainer.SomeEnum.EnumVal = InnerEnumContainer.SomeEnum._UNINITIALIZED
 
 			def __newMerged = InnerEnumContainer(
@@ -505,7 +540,7 @@ object OuterEnumContainer {
 		def isInitialized = true
 		def build = this
 		def buildPartial = this
-		def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+		def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 		override def getParserForType = this
 		def newBuilderForType = getDefaultInstanceForType
 		def toBuilder = this
@@ -528,7 +563,7 @@ object OuterEnumContainer {
 
 		def parseFrom(data: Array[Byte]): InnerEnumContainer = defaultInstance.mergeFrom(data)
 		def parseFrom(data: Array[Byte], offset: Int, length: Int): InnerEnumContainer = defaultInstance.mergeFrom(data, offset, length)
-		def parseFrom(byteString: com.google.protobuf.ByteString): InnerEnumContainer = defaultInstance.mergeFrom(byteString)
+		def parseFrom(byteString: com.google.protobuf2.ByteString): InnerEnumContainer = defaultInstance.mergeFrom(byteString)
 		def parseFrom(stream: java.io.InputStream): InnerEnumContainer = defaultInstance.mergeFrom(stream)
 		def parseDelimitedFrom(stream: java.io.InputStream): Option[InnerEnumContainer] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -555,7 +590,7 @@ object OuterEnumContainer {
 				case 2 => VALUE_3
 				case _default => throw new net.sandrogrzicic.scalabuff.UnknownEnumException(_default)
 			}
-			val internalGetValueMap = new com.google.protobuf.Internal.EnumLiteMap[EnumVal] {
+			val internalGetValueMap = new com.google.protobuf2.Internal.EnumLiteMap[EnumVal] {
 				def findValueByNumber(id: Int): EnumVal = valueOf(id)
 			}
 		}
@@ -564,17 +599,17 @@ object OuterEnumContainer {
 }
 
 object EnumTest {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "MyPeripherals" -> (bytes ⇒ MyPeripherals.parseFrom(bytes)),
 		 "Outer" -> (bytes ⇒ Outer.parseFrom(bytes)),
 		 "OuterDuplicate" -> (bytes ⇒ OuterDuplicate.parseFrom(bytes)),
 		 "OuterEnumContainer" -> (bytes ⇒ OuterEnumContainer.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

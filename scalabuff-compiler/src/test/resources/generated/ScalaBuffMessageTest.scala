@@ -5,25 +5,32 @@ package resources.generated
 
 final case class EmptyMessage (
 
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[EmptyMessage]
 	with net.sandrogrzicic.scalabuff.Parser[EmptyMessage] {
 
+	
 
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+          
+
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): EmptyMessage = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): EmptyMessage = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 
 		def __newMerged = EmptyMessage(
 
@@ -46,7 +53,7 @@ final case class EmptyMessage (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -68,7 +75,7 @@ object EmptyMessage {
 
 	def parseFrom(data: Array[Byte]): EmptyMessage = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): EmptyMessage = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): EmptyMessage = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): EmptyMessage = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): EmptyMessage = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[EmptyMessage] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -79,14 +86,14 @@ object EmptyMessage {
 }
 
 object ScalaBuffMessageTest {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "EmptyMessage" -> (bytes ⇒ EmptyMessage.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

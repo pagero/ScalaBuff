@@ -6,24 +6,31 @@ package resources.generated
 final case class NumbersTest1 (
 	`someHexNumber`: Option[Int] = Some(430689775),
 	`someOctNumber`: Option[Int] = Some(342391)
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[NumbersTest1]
 	with net.sandrogrzicic.scalabuff.Parser[NumbersTest1] {
 
-	def setSomeHexNumber(_f: Int) = copy(`someHexNumber` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setSomeHexNumber(_f: Int) = copy(`someHexNumber` = Some(_f))
 	def setSomeOctNumber(_f: Int) = copy(`someOctNumber` = Some(_f))
 
 	def clearSomeHexNumber = copy(`someHexNumber` = None)
 	def clearSomeOctNumber = copy(`someOctNumber` = None)
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		if (`someHexNumber`.isDefined) output.writeInt32(1, `someHexNumber`.get)
 		if (`someOctNumber`.isDefined) output.writeInt32(2, `someOctNumber`.get)
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		if (`someHexNumber`.isDefined) __size += computeInt32Size(1, `someHexNumber`.get)
 		if (`someOctNumber`.isDefined) __size += computeInt32Size(2, `someOctNumber`.get)
@@ -31,8 +38,8 @@ final case class NumbersTest1 (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): NumbersTest1 = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): NumbersTest1 = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __someHexNumber: Option[Int] = `someHexNumber`
 		var __someOctNumber: Option[Int] = `someOctNumber`
 
@@ -61,7 +68,7 @@ final case class NumbersTest1 (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -85,7 +92,7 @@ object NumbersTest1 {
 
 	def parseFrom(data: Array[Byte]): NumbersTest1 = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): NumbersTest1 = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): NumbersTest1 = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): NumbersTest1 = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): NumbersTest1 = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[NumbersTest1] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -111,20 +118,20 @@ object NumbersTest2 extends net.sandrogrzicic.scalabuff.Enum {
 		case 342391 => SOME_OCT_NUMBER
 		case _default => throw new net.sandrogrzicic.scalabuff.UnknownEnumException(_default)
 	}
-	val internalGetValueMap = new com.google.protobuf.Internal.EnumLiteMap[EnumVal] {
+	val internalGetValueMap = new com.google.protobuf2.Internal.EnumLiteMap[EnumVal] {
 		def findValueByNumber(id: Int): EnumVal = valueOf(id)
 	}
 }
 
 object Numbers {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "NumbersTest1" -> (bytes ⇒ NumbersTest1.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

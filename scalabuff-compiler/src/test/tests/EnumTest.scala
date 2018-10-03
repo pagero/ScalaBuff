@@ -1,10 +1,10 @@
 package tests
 
-import com.google.protobuf._
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
+
+import com.google.protobuf2._
 import org.scalatest.{FunSuite, Matchers}
 import resources.generated._
-import scala.collection._
 
 /**
  * Tests whether generated Scala classes function correctly.

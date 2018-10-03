@@ -7,27 +7,34 @@ package resources.generated
 
 final case class UsesImportPackage (
 	`packageTest`: resources.generated.nested.PackageTest = resources.generated.nested.PackageTest.defaultInstance
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[UsesImportPackage]
 	with net.sandrogrzicic.scalabuff.Parser[UsesImportPackage] {
 
+	
 
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+          
+
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeMessage(1, `packageTest`)
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeMessageSize(1, `packageTest`)
 
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): UsesImportPackage = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): UsesImportPackage = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __packageTest: resources.generated.nested.PackageTest = resources.generated.nested.PackageTest.defaultInstance
 
 		def __newMerged = UsesImportPackage(
@@ -52,7 +59,7 @@ final case class UsesImportPackage (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -75,7 +82,7 @@ object UsesImportPackage {
 
 	def parseFrom(data: Array[Byte]): UsesImportPackage = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): UsesImportPackage = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): UsesImportPackage = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): UsesImportPackage = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): UsesImportPackage = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[UsesImportPackage] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -87,14 +94,14 @@ object UsesImportPackage {
 }
 
 object ImportPackages {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "UsesImportPackage" -> (bytes ⇒ UsesImportPackage.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

@@ -5,29 +5,36 @@ package resources.generated
 
 final case class SingleQuote (
 	`singleQuotedField`: Option[String] = Some("NA")
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[SingleQuote]
 	with net.sandrogrzicic.scalabuff.Parser[SingleQuote] {
 
-	def setSingleQuotedField(_f: String) = copy(`singleQuotedField` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setSingleQuotedField(_f: String) = copy(`singleQuotedField` = Some(_f))
 
 	def clearSingleQuotedField = copy(`singleQuotedField` = None)
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		if (`singleQuotedField`.isDefined) output.writeString(1, `singleQuotedField`.get)
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		if (`singleQuotedField`.isDefined) __size += computeStringSize(1, `singleQuotedField`.get)
 
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): SingleQuote = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): SingleQuote = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __singleQuotedField: Option[String] = `singleQuotedField`
 
 		def __newMerged = SingleQuote(
@@ -52,7 +59,7 @@ final case class SingleQuote (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -62,7 +69,7 @@ final case class SingleQuote (
 		val sb = StringBuilder.newBuilder
 		sb
 			.append("{")
-			if (`singleQuotedField`.isDefined) { sb.append(indent1).append("\"singleQuotedField\": ").append("\"").append(`singleQuotedField`.get).append("\"").append(',') }
+			if (`singleQuotedField`.isDefined) { sb.append(indent1).append("\"singleQuotedField\": ").append(escape(`singleQuotedField`.get)).append(',') }
 		if (sb.last.equals(',')) sb.length -= 1
 		sb.append(indent0).append("}")
 		sb.toString()
@@ -75,7 +82,7 @@ object SingleQuote {
 
 	def parseFrom(data: Array[Byte]): SingleQuote = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): SingleQuote = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): SingleQuote = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): SingleQuote = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): SingleQuote = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[SingleQuote] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -87,14 +94,14 @@ object SingleQuote {
 }
 
 object Singlequoted {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "SingleQuote" -> (bytes ⇒ SingleQuote.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

@@ -1,7 +1,5 @@
+import sbt.Keys._
 import sbt._
-import Keys._
-import java.io.File
-import com.typesafe.sbt.osgi.SbtOsgi._
 
 /**
  * ScalaBuff SBT build file.
@@ -22,7 +20,7 @@ object ScalaBuffBuild extends Build {
 	lazy val buildSettings = Seq(
 		name := "ScalaBuff",
 		organization := "net.sandrogrzicic",
-		version := "1.4.0-1-pb2",
+		version := "1.4.0-2pb2",
 		scalaVersion := "2.11.4",
 		logLevel := Level.Info
 	)
@@ -99,7 +97,6 @@ object ScalaBuffBuild extends Build {
  * License: https://github.com/paulp/scala-improving/blob/master/LICENSE.txt
  */
 abstract class PublishToSonatype(build: Build) {
-  import build._
 
   val ossSnapshots = "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
   val ossStaging   = "Sonatype OSS Staging" at "https://oss.sonatype.org/service/local/staging/deploy/maven2/"

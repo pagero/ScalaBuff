@@ -5,27 +5,34 @@ package resources.generated
 
 final case class TopLevel (
 	`idToplevel`: Int = 0
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[TopLevel]
 	with net.sandrogrzicic.scalabuff.Parser[TopLevel] {
 
+	
 
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+          
+
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeUInt32(1, `idToplevel`)
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeUInt32Size(1, `idToplevel`)
 
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): TopLevel = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): TopLevel = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __idToplevel: Int = 0
 
 		def __newMerged = TopLevel(
@@ -50,7 +57,7 @@ final case class TopLevel (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -73,7 +80,7 @@ object TopLevel {
 
 	def parseFrom(data: Array[Byte]): TopLevel = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): TopLevel = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): TopLevel = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): TopLevel = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): TopLevel = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[TopLevel] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -84,27 +91,34 @@ object TopLevel {
 
 	final case class Inner (
 		`idInner`: Int = 0
-	) extends com.google.protobuf.GeneratedMessageLite
-		with com.google.protobuf.MessageLite.Builder
+	) extends com.google.protobuf2.GeneratedMessageLite
+		with com.google.protobuf2.MessageLite.Builder
 		with net.sandrogrzicic.scalabuff.Message[Inner]
 		with net.sandrogrzicic.scalabuff.Parser[Inner] {
 
+		
 
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
 
-		def writeTo(output: com.google.protobuf.CodedOutputStream) {
+          
+
+		def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 			output.writeUInt32(1, `idInner`)
 		}
 
 		def getSerializedSize = {
-			import com.google.protobuf.CodedOutputStream._
+			import com.google.protobuf2.CodedOutputStream._
 			var __size = 0
 			__size += computeUInt32Size(1, `idInner`)
 
 			__size
 		}
 
-		def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): Inner = {
-			import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+		def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): Inner = {
+			import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 			var __idInner: Int = 0
 
 			def __newMerged = Inner(
@@ -129,7 +143,7 @@ object TopLevel {
 		def isInitialized = true
 		def build = this
 		def buildPartial = this
-		def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+		def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 		override def getParserForType = this
 		def newBuilderForType = getDefaultInstanceForType
 		def toBuilder = this
@@ -152,7 +166,7 @@ object TopLevel {
 
 		def parseFrom(data: Array[Byte]): Inner = defaultInstance.mergeFrom(data)
 		def parseFrom(data: Array[Byte], offset: Int, length: Int): Inner = defaultInstance.mergeFrom(data, offset, length)
-		def parseFrom(byteString: com.google.protobuf.ByteString): Inner = defaultInstance.mergeFrom(byteString)
+		def parseFrom(byteString: com.google.protobuf2.ByteString): Inner = defaultInstance.mergeFrom(byteString)
 		def parseFrom(stream: java.io.InputStream): Inner = defaultInstance.mergeFrom(stream)
 		def parseDelimitedFrom(stream: java.io.InputStream): Option[Inner] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -173,12 +187,19 @@ final case class Foobar (
 	`topLevelReq`: TopLevel = TopLevel.defaultInstance,
 	`topLevelOpt`: Option[TopLevel] = None,
 	`topLevelInnerReq`: TopLevel.Inner = TopLevel.Inner.defaultInstance
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[Foobar]
 	with net.sandrogrzicic.scalabuff.Parser[Foobar] {
 
-	def setOptFoo(_f: Foobar.Foo) = copy(`optFoo` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setOptFoo(_f: Foobar.Foo) = copy(`optFoo` = Some(_f))
 	def setOptBar(_f: Foobar.Bar) = copy(`optBar` = Some(_f))
 	def setRepFoo(_i: Int, _v: Foobar.Foo) = copy(`repFoo` = `repFoo`.updated(_i, _v))
 	def addRepFoo(_f: Foobar.Foo) = copy(`repFoo` = `repFoo` :+ _f)
@@ -201,7 +222,7 @@ final case class Foobar (
 	def clearRepFooBar = copy(`repFooBar` = Vector.empty[Foobar.FooBar])
 	def clearTopLevelOpt = copy(`topLevelOpt` = None)
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeMessage(1, `reqFoo`)
 		if (`optFoo`.isDefined) output.writeMessage(2, `optFoo`.get)
 		if (`optBar`.isDefined) output.writeMessage(3, `optBar`.get)
@@ -214,7 +235,7 @@ final case class Foobar (
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeMessageSize(1, `reqFoo`)
 		if (`optFoo`.isDefined) __size += computeMessageSize(2, `optFoo`.get)
@@ -229,8 +250,8 @@ final case class Foobar (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): Foobar = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): Foobar = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __reqFoo: Foobar.Foo = Foobar.Foo.defaultInstance
 		var __optFoo: Option[Foobar.Foo] = `optFoo`
 		var __optBar: Option[Foobar.Bar] = `optBar`
@@ -296,7 +317,7 @@ final case class Foobar (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -327,7 +348,7 @@ object Foobar {
 
 	def parseFrom(data: Array[Byte]): Foobar = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): Foobar = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): Foobar = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): Foobar = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): Foobar = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[Foobar] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -346,29 +367,36 @@ object Foobar {
 
 	final case class Foo (
 		`id`: Option[Long] = None
-	) extends com.google.protobuf.GeneratedMessageLite
-		with com.google.protobuf.MessageLite.Builder
+	) extends com.google.protobuf2.GeneratedMessageLite
+		with com.google.protobuf2.MessageLite.Builder
 		with net.sandrogrzicic.scalabuff.Message[Foo]
 		with net.sandrogrzicic.scalabuff.Parser[Foo] {
 
-		def setId(_f: Long) = copy(`id` = Some(_f))
+		
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          		def setId(_f: Long) = copy(`id` = Some(_f))
 
 		def clearId = copy(`id` = None)
 
-		def writeTo(output: com.google.protobuf.CodedOutputStream) {
+		def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 			if (`id`.isDefined) output.writeUInt64(1, `id`.get)
 		}
 
 		def getSerializedSize = {
-			import com.google.protobuf.CodedOutputStream._
+			import com.google.protobuf2.CodedOutputStream._
 			var __size = 0
 			if (`id`.isDefined) __size += computeUInt64Size(1, `id`.get)
 
 			__size
 		}
 
-		def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): Foo = {
-			import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+		def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): Foo = {
+			import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 			var __id: Option[Long] = `id`
 
 			def __newMerged = Foo(
@@ -393,7 +421,7 @@ object Foobar {
 		def isInitialized = true
 		def build = this
 		def buildPartial = this
-		def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+		def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 		override def getParserForType = this
 		def newBuilderForType = getDefaultInstanceForType
 		def toBuilder = this
@@ -416,7 +444,7 @@ object Foobar {
 
 		def parseFrom(data: Array[Byte]): Foo = defaultInstance.mergeFrom(data)
 		def parseFrom(data: Array[Byte], offset: Int, length: Int): Foo = defaultInstance.mergeFrom(data, offset, length)
-		def parseFrom(byteString: com.google.protobuf.ByteString): Foo = defaultInstance.mergeFrom(byteString)
+		def parseFrom(byteString: com.google.protobuf2.ByteString): Foo = defaultInstance.mergeFrom(byteString)
 		def parseFrom(stream: java.io.InputStream): Foo = defaultInstance.mergeFrom(stream)
 		def parseDelimitedFrom(stream: java.io.InputStream): Option[Foo] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -428,29 +456,36 @@ object Foobar {
 	}
 	final case class Bar (
 		`id`: Option[Long] = None
-	) extends com.google.protobuf.GeneratedMessageLite
-		with com.google.protobuf.MessageLite.Builder
+	) extends com.google.protobuf2.GeneratedMessageLite
+		with com.google.protobuf2.MessageLite.Builder
 		with net.sandrogrzicic.scalabuff.Message[Bar]
 		with net.sandrogrzicic.scalabuff.Parser[Bar] {
 
-		def setId(_f: Long) = copy(`id` = Some(_f))
+		
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          		def setId(_f: Long) = copy(`id` = Some(_f))
 
 		def clearId = copy(`id` = None)
 
-		def writeTo(output: com.google.protobuf.CodedOutputStream) {
+		def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 			if (`id`.isDefined) output.writeUInt64(1, `id`.get)
 		}
 
 		def getSerializedSize = {
-			import com.google.protobuf.CodedOutputStream._
+			import com.google.protobuf2.CodedOutputStream._
 			var __size = 0
 			if (`id`.isDefined) __size += computeUInt64Size(1, `id`.get)
 
 			__size
 		}
 
-		def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): Bar = {
-			import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+		def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): Bar = {
+			import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 			var __id: Option[Long] = `id`
 
 			def __newMerged = Bar(
@@ -475,7 +510,7 @@ object Foobar {
 		def isInitialized = true
 		def build = this
 		def buildPartial = this
-		def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+		def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 		override def getParserForType = this
 		def newBuilderForType = getDefaultInstanceForType
 		def toBuilder = this
@@ -498,7 +533,7 @@ object Foobar {
 
 		def parseFrom(data: Array[Byte]): Bar = defaultInstance.mergeFrom(data)
 		def parseFrom(data: Array[Byte], offset: Int, length: Int): Bar = defaultInstance.mergeFrom(data, offset, length)
-		def parseFrom(byteString: com.google.protobuf.ByteString): Bar = defaultInstance.mergeFrom(byteString)
+		def parseFrom(byteString: com.google.protobuf2.ByteString): Bar = defaultInstance.mergeFrom(byteString)
 		def parseFrom(stream: java.io.InputStream): Bar = defaultInstance.mergeFrom(stream)
 		def parseDelimitedFrom(stream: java.io.InputStream): Option[Bar] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -510,29 +545,36 @@ object Foobar {
 	}
 	final case class FooBar (
 		`id`: Option[Long] = None
-	) extends com.google.protobuf.GeneratedMessageLite
-		with com.google.protobuf.MessageLite.Builder
+	) extends com.google.protobuf2.GeneratedMessageLite
+		with com.google.protobuf2.MessageLite.Builder
 		with net.sandrogrzicic.scalabuff.Message[FooBar]
 		with net.sandrogrzicic.scalabuff.Parser[FooBar] {
 
-		def setId(_f: Long) = copy(`id` = Some(_f))
+		
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          		def setId(_f: Long) = copy(`id` = Some(_f))
 
 		def clearId = copy(`id` = None)
 
-		def writeTo(output: com.google.protobuf.CodedOutputStream) {
+		def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 			if (`id`.isDefined) output.writeUInt64(1, `id`.get)
 		}
 
 		def getSerializedSize = {
-			import com.google.protobuf.CodedOutputStream._
+			import com.google.protobuf2.CodedOutputStream._
 			var __size = 0
 			if (`id`.isDefined) __size += computeUInt64Size(1, `id`.get)
 
 			__size
 		}
 
-		def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): FooBar = {
-			import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+		def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): FooBar = {
+			import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 			var __id: Option[Long] = `id`
 
 			def __newMerged = FooBar(
@@ -557,7 +599,7 @@ object Foobar {
 		def isInitialized = true
 		def build = this
 		def buildPartial = this
-		def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+		def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 		override def getParserForType = this
 		def newBuilderForType = getDefaultInstanceForType
 		def toBuilder = this
@@ -580,7 +622,7 @@ object Foobar {
 
 		def parseFrom(data: Array[Byte]): FooBar = defaultInstance.mergeFrom(data)
 		def parseFrom(data: Array[Byte], offset: Int, length: Int): FooBar = defaultInstance.mergeFrom(data, offset, length)
-		def parseFrom(byteString: com.google.protobuf.ByteString): FooBar = defaultInstance.mergeFrom(byteString)
+		def parseFrom(byteString: com.google.protobuf2.ByteString): FooBar = defaultInstance.mergeFrom(byteString)
 		def parseFrom(stream: java.io.InputStream): FooBar = defaultInstance.mergeFrom(stream)
 		def parseDelimitedFrom(stream: java.io.InputStream): Option[FooBar] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -593,15 +635,15 @@ object Foobar {
 }
 
 object NestedMessages {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "TopLevel" -> (bytes ⇒ TopLevel.parseFrom(bytes)),
 		 "Foobar" -> (bytes ⇒ Foobar.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

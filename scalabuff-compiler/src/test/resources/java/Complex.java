@@ -6,14 +6,14 @@ package resources.java;
 public final class Complex {
   private Complex() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
+      com.google.protobuf2.ExtensionRegistryLite registry) {
   }
   public interface ComplexMessageOrBuilder
-      extends com.google.protobuf.MessageLiteOrBuilder {
+      extends com.google.protobuf2.MessageLiteOrBuilder {
     
     // required bytes first_field = 1;
     boolean hasFirstField();
-    com.google.protobuf.ByteString getFirstField();
+    com.google.protobuf2.ByteString getFirstField();
     
     // optional string second_field = 2 [default = "defaultValueForSecondField"];
     boolean hasSecondField();
@@ -34,12 +34,12 @@ public final class Complex {
     String getRepeatedStringField(int index);
     
     // repeated bytes repeated_bytes_field = 6;
-    java.util.List<com.google.protobuf.ByteString> getRepeatedBytesFieldList();
+    java.util.List<com.google.protobuf2.ByteString> getRepeatedBytesFieldList();
     int getRepeatedBytesFieldCount();
-    com.google.protobuf.ByteString getRepeatedBytesField(int index);
+    com.google.protobuf2.ByteString getRepeatedBytesField(int index);
   }
   public static final class ComplexMessage extends
-      com.google.protobuf.GeneratedMessageLite
+      com.google.protobuf2.GeneratedMessageLite
       implements ComplexMessageOrBuilder {
     // Use ComplexMessage.newBuilder() to construct.
     private ComplexMessage(Builder builder) {
@@ -57,7 +57,7 @@ public final class Complex {
     }
     
     public enum SimpleEnum
-        implements com.google.protobuf.Internal.EnumLite {
+        implements com.google.protobuf2.Internal.EnumLite {
       KEY_NAME(0, 1),
       ;
       
@@ -73,13 +73,13 @@ public final class Complex {
         }
       }
       
-      public static com.google.protobuf.Internal.EnumLiteMap<SimpleEnum>
+      public static com.google.protobuf2.Internal.EnumLiteMap<SimpleEnum>
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<SimpleEnum>
+      private static com.google.protobuf2.Internal.EnumLiteMap<SimpleEnum>
           internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SimpleEnum>() {
+            new com.google.protobuf2.Internal.EnumLiteMap<SimpleEnum>() {
               public SimpleEnum findValueByNumber(int number) {
                 return SimpleEnum.valueOf(number);
               }
@@ -95,7 +95,7 @@ public final class Complex {
     }
     
     public interface NestedOrBuilder
-        extends com.google.protobuf.MessageLiteOrBuilder {
+        extends com.google.protobuf2.MessageLiteOrBuilder {
       
       // required string nested_field = 1;
       boolean hasNestedField();
@@ -106,7 +106,7 @@ public final class Complex {
       resources.java.Complex.ComplexMessage.SimpleEnum getNestedEnum();
     }
     public static final class Nested extends
-        com.google.protobuf.GeneratedMessageLite
+        com.google.protobuf2.GeneratedMessageLite
         implements NestedOrBuilder {
       // Use Nested.newBuilder() to construct.
       private Nested(Builder builder) {
@@ -135,24 +135,24 @@ public final class Complex {
         if (ref instanceof String) {
           return (String) ref;
         } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
+          com.google.protobuf2.ByteString bs = 
+              (com.google.protobuf2.ByteString) ref;
           String s = bs.toStringUtf8();
-          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          if (com.google.protobuf2.Internal.isValidUtf8(bs)) {
             nestedField_ = s;
           }
           return s;
         }
       }
-      private com.google.protobuf.ByteString getNestedFieldBytes() {
+      private com.google.protobuf2.ByteString getNestedFieldBytes() {
         java.lang.Object ref = nestedField_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+          com.google.protobuf2.ByteString b = 
+              com.google.protobuf2.ByteString.copyFromUtf8((String) ref);
           nestedField_ = b;
           return b;
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          return (com.google.protobuf2.ByteString) ref;
         }
       }
       
@@ -183,7 +183,7 @@ public final class Complex {
         return true;
       }
       
-      public void writeTo(com.google.protobuf.CodedOutputStream output)
+      public void writeTo(com.google.protobuf2.CodedOutputStream output)
                           throws java.io.IOException {
         getSerializedSize();
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -201,11 +201,11 @@ public final class Complex {
       
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          size += com.google.protobuf.CodedOutputStream
+          size += com.google.protobuf2.CodedOutputStream
             .computeBytesSize(1, getNestedFieldBytes());
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          size += com.google.protobuf.CodedOutputStream
+          size += com.google.protobuf2.CodedOutputStream
             .computeEnumSize(2, nestedEnum_.getNumber());
         }
         memoizedSerializedSize = size;
@@ -220,25 +220,25 @@ public final class Complex {
       }
       
       public static resources.java.Complex.ComplexMessage.Nested parseFrom(
-          com.google.protobuf.ByteString data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
+          com.google.protobuf2.ByteString data)
+          throws com.google.protobuf2.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data).buildParsed();
       }
       public static resources.java.Complex.ComplexMessage.Nested parseFrom(
-          com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
+          com.google.protobuf2.ByteString data,
+          com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf2.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
       }
       public static resources.java.Complex.ComplexMessage.Nested parseFrom(byte[] data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
+          throws com.google.protobuf2.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data).buildParsed();
       }
       public static resources.java.Complex.ComplexMessage.Nested parseFrom(
           byte[] data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
+          com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf2.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
       }
@@ -248,7 +248,7 @@ public final class Complex {
       }
       public static resources.java.Complex.ComplexMessage.Nested parseFrom(
           java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input, extensionRegistry)
                  .buildParsed();
@@ -264,7 +264,7 @@ public final class Complex {
       }
       public static resources.java.Complex.ComplexMessage.Nested parseDelimitedFrom(
           java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         Builder builder = newBuilder();
         if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
@@ -274,13 +274,13 @@ public final class Complex {
         }
       }
       public static resources.java.Complex.ComplexMessage.Nested parseFrom(
-          com.google.protobuf.CodedInputStream input)
+          com.google.protobuf2.CodedInputStream input)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input).buildParsed();
       }
       public static resources.java.Complex.ComplexMessage.Nested parseFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          com.google.protobuf2.CodedInputStream input,
+          com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input, extensionRegistry)
                  .buildParsed();
@@ -294,7 +294,7 @@ public final class Complex {
       public Builder toBuilder() { return newBuilder(this); }
       
       public static final class Builder extends
-          com.google.protobuf.GeneratedMessageLite.Builder<
+          com.google.protobuf2.GeneratedMessageLite.Builder<
             resources.java.Complex.ComplexMessage.Nested, Builder>
           implements resources.java.Complex.ComplexMessage.NestedOrBuilder {
         // Construct using resources.java.Complex.ComplexMessage.Nested.newBuilder()
@@ -334,7 +334,7 @@ public final class Complex {
         }
         
         private resources.java.Complex.ComplexMessage.Nested buildParsed()
-            throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf2.InvalidProtocolBufferException {
           resources.java.Complex.ComplexMessage.Nested result = buildPartial();
           if (!result.isInitialized()) {
             throw newUninitializedMessageException(
@@ -379,8 +379,8 @@ public final class Complex {
         }
         
         public Builder mergeFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            com.google.protobuf2.CodedInputStream input,
+            com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
           while (true) {
             int tag = input.readTag();
@@ -423,7 +423,7 @@ public final class Complex {
         public String getNestedField() {
           java.lang.Object ref = nestedField_;
           if (!(ref instanceof String)) {
-            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+            String s = ((com.google.protobuf2.ByteString) ref).toStringUtf8();
             nestedField_ = s;
             return s;
           } else {
@@ -445,7 +445,7 @@ public final class Complex {
           
           return this;
         }
-        void setNestedField(com.google.protobuf.ByteString value) {
+        void setNestedField(com.google.protobuf2.ByteString value) {
           bitField0_ |= 0x00000001;
           nestedField_ = value;
           
@@ -489,11 +489,11 @@ public final class Complex {
     private int bitField0_;
     // required bytes first_field = 1;
     public static final int FIRST_FIELD_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString firstField_;
+    private com.google.protobuf2.ByteString firstField_;
     public boolean hasFirstField() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.google.protobuf.ByteString getFirstField() {
+    public com.google.protobuf2.ByteString getFirstField() {
       return firstField_;
     }
     
@@ -508,24 +508,24 @@ public final class Complex {
       if (ref instanceof String) {
         return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf2.ByteString bs = 
+            (com.google.protobuf2.ByteString) ref;
         String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        if (com.google.protobuf2.Internal.isValidUtf8(bs)) {
           secondField_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getSecondFieldBytes() {
+    private com.google.protobuf2.ByteString getSecondFieldBytes() {
       java.lang.Object ref = secondField_;
       if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        com.google.protobuf2.ByteString b = 
+            com.google.protobuf2.ByteString.copyFromUtf8((String) ref);
         secondField_ = b;
         return b;
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        return (com.google.protobuf2.ByteString) ref;
       }
     }
     
@@ -554,7 +554,7 @@ public final class Complex {
     
     // repeated string repeated_string_field = 5;
     public static final int REPEATED_STRING_FIELD_FIELD_NUMBER = 5;
-    private com.google.protobuf.LazyStringList repeatedStringField_;
+    private com.google.protobuf2.LazyStringList repeatedStringField_;
     public java.util.List<String>
         getRepeatedStringFieldList() {
       return repeatedStringField_;
@@ -568,24 +568,24 @@ public final class Complex {
     
     // repeated bytes repeated_bytes_field = 6;
     public static final int REPEATED_BYTES_FIELD_FIELD_NUMBER = 6;
-    private java.util.List<com.google.protobuf.ByteString> repeatedBytesField_;
-    public java.util.List<com.google.protobuf.ByteString>
+    private java.util.List<com.google.protobuf2.ByteString> repeatedBytesField_;
+    public java.util.List<com.google.protobuf2.ByteString>
         getRepeatedBytesFieldList() {
       return repeatedBytesField_;
     }
     public int getRepeatedBytesFieldCount() {
       return repeatedBytesField_.size();
     }
-    public com.google.protobuf.ByteString getRepeatedBytesField(int index) {
+    public com.google.protobuf2.ByteString getRepeatedBytesField(int index) {
       return repeatedBytesField_.get(index);
     }
     
     private void initFields() {
-      firstField_ = com.google.protobuf.ByteString.EMPTY;
+      firstField_ = com.google.protobuf2.ByteString.EMPTY;
       secondField_ = "defaultValueForSecondField";
       nestedOuterField_ = resources.java.Complex.ComplexMessage.Nested.getDefaultInstance();
       simpleEnumField_ = java.util.Collections.emptyList();
-      repeatedStringField_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      repeatedStringField_ = com.google.protobuf2.LazyStringArrayList.EMPTY;
       repeatedBytesField_ = java.util.Collections.emptyList();;
     }
     private byte memoizedIsInitialized = -1;
@@ -607,7 +607,7 @@ public final class Complex {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    public void writeTo(com.google.protobuf2.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -637,21 +637,21 @@ public final class Complex {
     
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
+        size += com.google.protobuf2.CodedOutputStream
           .computeBytesSize(1, firstField_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
+        size += com.google.protobuf2.CodedOutputStream
           .computeBytesSize(2, getSecondFieldBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
+        size += com.google.protobuf2.CodedOutputStream
           .computeMessageSize(3, nestedOuterField_);
       }
       {
         int dataSize = 0;
         for (int i = 0; i < simpleEnumField_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
+          dataSize += com.google.protobuf2.CodedOutputStream
             .computeEnumSizeNoTag(simpleEnumField_.get(i).getNumber());
         }
         size += dataSize;
@@ -660,7 +660,7 @@ public final class Complex {
       {
         int dataSize = 0;
         for (int i = 0; i < repeatedStringField_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
+          dataSize += com.google.protobuf2.CodedOutputStream
             .computeBytesSizeNoTag(repeatedStringField_.getByteString(i));
         }
         size += dataSize;
@@ -669,7 +669,7 @@ public final class Complex {
       {
         int dataSize = 0;
         for (int i = 0; i < repeatedBytesField_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
+          dataSize += com.google.protobuf2.CodedOutputStream
             .computeBytesSizeNoTag(repeatedBytesField_.get(i));
         }
         size += dataSize;
@@ -687,25 +687,25 @@ public final class Complex {
     }
     
     public static resources.java.Complex.ComplexMessage parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        com.google.protobuf2.ByteString data)
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
     public static resources.java.Complex.ComplexMessage parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        com.google.protobuf2.ByteString data,
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
     public static resources.java.Complex.ComplexMessage parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
     public static resources.java.Complex.ComplexMessage parseFrom(
         byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
@@ -715,7 +715,7 @@ public final class Complex {
     }
     public static resources.java.Complex.ComplexMessage parseFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
@@ -731,7 +731,7 @@ public final class Complex {
     }
     public static resources.java.Complex.ComplexMessage parseDelimitedFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
@@ -741,13 +741,13 @@ public final class Complex {
       }
     }
     public static resources.java.Complex.ComplexMessage parseFrom(
-        com.google.protobuf.CodedInputStream input)
+        com.google.protobuf2.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
     public static resources.java.Complex.ComplexMessage parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        com.google.protobuf2.CodedInputStream input,
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
@@ -761,7 +761,7 @@ public final class Complex {
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageLite.Builder<
+        com.google.protobuf2.GeneratedMessageLite.Builder<
           resources.java.Complex.ComplexMessage, Builder>
         implements resources.java.Complex.ComplexMessageOrBuilder {
       // Construct using resources.java.Complex.ComplexMessage.newBuilder()
@@ -777,7 +777,7 @@ public final class Complex {
       
       public Builder clear() {
         super.clear();
-        firstField_ = com.google.protobuf.ByteString.EMPTY;
+        firstField_ = com.google.protobuf2.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000001);
         secondField_ = "defaultValueForSecondField";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -785,7 +785,7 @@ public final class Complex {
         bitField0_ = (bitField0_ & ~0x00000004);
         simpleEnumField_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000008);
-        repeatedStringField_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        repeatedStringField_ = com.google.protobuf2.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
         repeatedBytesField_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -809,7 +809,7 @@ public final class Complex {
       }
       
       private resources.java.Complex.ComplexMessage buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
+          throws com.google.protobuf2.InvalidProtocolBufferException {
         resources.java.Complex.ComplexMessage result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
@@ -840,7 +840,7 @@ public final class Complex {
         }
         result.simpleEnumField_ = simpleEnumField_;
         if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          repeatedStringField_ = new com.google.protobuf.UnmodifiableLazyStringList(
+          repeatedStringField_ = new com.google.protobuf2.UnmodifiableLazyStringList(
               repeatedStringField_);
           bitField0_ = (bitField0_ & ~0x00000010);
         }
@@ -913,8 +913,8 @@ public final class Complex {
       }
       
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          com.google.protobuf2.CodedInputStream input,
+          com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         while (true) {
           int tag = input.readTag();
@@ -986,14 +986,14 @@ public final class Complex {
       private int bitField0_;
       
       // required bytes first_field = 1;
-      private com.google.protobuf.ByteString firstField_ = com.google.protobuf.ByteString.EMPTY;
+      private com.google.protobuf2.ByteString firstField_ = com.google.protobuf2.ByteString.EMPTY;
       public boolean hasFirstField() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.google.protobuf.ByteString getFirstField() {
+      public com.google.protobuf2.ByteString getFirstField() {
         return firstField_;
       }
-      public Builder setFirstField(com.google.protobuf.ByteString value) {
+      public Builder setFirstField(com.google.protobuf2.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1017,7 +1017,7 @@ public final class Complex {
       public String getSecondField() {
         java.lang.Object ref = secondField_;
         if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          String s = ((com.google.protobuf2.ByteString) ref).toStringUtf8();
           secondField_ = s;
           return s;
         } else {
@@ -1039,7 +1039,7 @@ public final class Complex {
         
         return this;
       }
-      void setSecondField(com.google.protobuf.ByteString value) {
+      void setSecondField(com.google.protobuf2.ByteString value) {
         bitField0_ |= 0x00000002;
         secondField_ = value;
         
@@ -1140,10 +1140,10 @@ public final class Complex {
       }
       
       // repeated string repeated_string_field = 5;
-      private com.google.protobuf.LazyStringList repeatedStringField_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private com.google.protobuf2.LazyStringList repeatedStringField_ = com.google.protobuf2.LazyStringArrayList.EMPTY;
       private void ensureRepeatedStringFieldIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          repeatedStringField_ = new com.google.protobuf.LazyStringArrayList(repeatedStringField_);
+          repeatedStringField_ = new com.google.protobuf2.LazyStringArrayList(repeatedStringField_);
           bitField0_ |= 0x00000010;
          }
       }
@@ -1184,37 +1184,37 @@ public final class Complex {
         return this;
       }
       public Builder clearRepeatedStringField() {
-        repeatedStringField_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        repeatedStringField_ = com.google.protobuf2.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
         
         return this;
       }
-      void addRepeatedStringField(com.google.protobuf.ByteString value) {
+      void addRepeatedStringField(com.google.protobuf2.ByteString value) {
         ensureRepeatedStringFieldIsMutable();
         repeatedStringField_.add(value);
         
       }
       
       // repeated bytes repeated_bytes_field = 6;
-      private java.util.List<com.google.protobuf.ByteString> repeatedBytesField_ = java.util.Collections.emptyList();;
+      private java.util.List<com.google.protobuf2.ByteString> repeatedBytesField_ = java.util.Collections.emptyList();;
       private void ensureRepeatedBytesFieldIsMutable() {
         if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          repeatedBytesField_ = new java.util.ArrayList<com.google.protobuf.ByteString>(repeatedBytesField_);
+          repeatedBytesField_ = new java.util.ArrayList<com.google.protobuf2.ByteString>(repeatedBytesField_);
           bitField0_ |= 0x00000020;
          }
       }
-      public java.util.List<com.google.protobuf.ByteString>
+      public java.util.List<com.google.protobuf2.ByteString>
           getRepeatedBytesFieldList() {
         return java.util.Collections.unmodifiableList(repeatedBytesField_);
       }
       public int getRepeatedBytesFieldCount() {
         return repeatedBytesField_.size();
       }
-      public com.google.protobuf.ByteString getRepeatedBytesField(int index) {
+      public com.google.protobuf2.ByteString getRepeatedBytesField(int index) {
         return repeatedBytesField_.get(index);
       }
       public Builder setRepeatedBytesField(
-          int index, com.google.protobuf.ByteString value) {
+          int index, com.google.protobuf2.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1223,7 +1223,7 @@ public final class Complex {
         
         return this;
       }
-      public Builder addRepeatedBytesField(com.google.protobuf.ByteString value) {
+      public Builder addRepeatedBytesField(com.google.protobuf2.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1233,7 +1233,7 @@ public final class Complex {
         return this;
       }
       public Builder addAllRepeatedBytesField(
-          java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
+          java.lang.Iterable<? extends com.google.protobuf2.ByteString> values) {
         ensureRepeatedBytesFieldIsMutable();
         super.addAll(values, repeatedBytesField_);
         
@@ -1258,7 +1258,7 @@ public final class Complex {
   }
   
   public interface AnotherMessageOrBuilder
-      extends com.google.protobuf.MessageLiteOrBuilder {
+      extends com.google.protobuf2.MessageLiteOrBuilder {
     
     // required .resources.java.ComplexMessage.Nested field_nested = 1;
     boolean hasFieldNested();
@@ -1269,7 +1269,7 @@ public final class Complex {
     resources.java.Complex.ComplexMessage.SimpleEnum getFieldEnum();
   }
   public static final class AnotherMessage extends
-      com.google.protobuf.GeneratedMessageLite
+      com.google.protobuf2.GeneratedMessageLite
       implements AnotherMessageOrBuilder {
     // Use AnotherMessage.newBuilder() to construct.
     private AnotherMessage(Builder builder) {
@@ -1332,7 +1332,7 @@ public final class Complex {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    public void writeTo(com.google.protobuf2.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1350,11 +1350,11 @@ public final class Complex {
     
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
+        size += com.google.protobuf2.CodedOutputStream
           .computeMessageSize(1, fieldNested_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
+        size += com.google.protobuf2.CodedOutputStream
           .computeEnumSize(2, fieldEnum_.getNumber());
       }
       memoizedSerializedSize = size;
@@ -1369,25 +1369,25 @@ public final class Complex {
     }
     
     public static resources.java.Complex.AnotherMessage parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        com.google.protobuf2.ByteString data)
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
     public static resources.java.Complex.AnotherMessage parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        com.google.protobuf2.ByteString data,
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
     public static resources.java.Complex.AnotherMessage parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
     public static resources.java.Complex.AnotherMessage parseFrom(
         byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
@@ -1397,7 +1397,7 @@ public final class Complex {
     }
     public static resources.java.Complex.AnotherMessage parseFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
@@ -1413,7 +1413,7 @@ public final class Complex {
     }
     public static resources.java.Complex.AnotherMessage parseDelimitedFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
@@ -1423,13 +1423,13 @@ public final class Complex {
       }
     }
     public static resources.java.Complex.AnotherMessage parseFrom(
-        com.google.protobuf.CodedInputStream input)
+        com.google.protobuf2.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
     public static resources.java.Complex.AnotherMessage parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        com.google.protobuf2.CodedInputStream input,
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
@@ -1443,7 +1443,7 @@ public final class Complex {
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageLite.Builder<
+        com.google.protobuf2.GeneratedMessageLite.Builder<
           resources.java.Complex.AnotherMessage, Builder>
         implements resources.java.Complex.AnotherMessageOrBuilder {
       // Construct using resources.java.Complex.AnotherMessage.newBuilder()
@@ -1483,7 +1483,7 @@ public final class Complex {
       }
       
       private resources.java.Complex.AnotherMessage buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
+          throws com.google.protobuf2.InvalidProtocolBufferException {
         resources.java.Complex.AnotherMessage result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
@@ -1536,8 +1536,8 @@ public final class Complex {
       }
       
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          com.google.protobuf2.CodedInputStream input,
+          com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         while (true) {
           int tag = input.readTag();

@@ -6,11 +6,11 @@ package resources.java;
 public final class Extensions {
   private Extensions() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
+      com.google.protobuf2.ExtensionRegistryLite registry) {
     registry.add(resources.java.Extensions.fooExtended);
   }
   public interface ExtensionsTestOrBuilder extends 
-       com.google.protobuf.GeneratedMessageLite.
+       com.google.protobuf2.GeneratedMessageLite.
             ExtendableMessageOrBuilder<ExtensionsTest> {
     
     // required int32 foo = 1;
@@ -18,7 +18,7 @@ public final class Extensions {
     int getFoo();
   }
   public static final class ExtensionsTest extends
-      com.google.protobuf.GeneratedMessageLite.ExtendableMessage<
+      com.google.protobuf2.GeneratedMessageLite.ExtendableMessage<
         ExtensionsTest> implements ExtensionsTestOrBuilder {
     // Use ExtensionsTest.newBuilder() to construct.
     private ExtensionsTest(Builder builder) {
@@ -66,10 +66,10 @@ public final class Extensions {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    public void writeTo(com.google.protobuf2.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      com.google.protobuf.GeneratedMessageLite
+      com.google.protobuf2.GeneratedMessageLite
         .ExtendableMessage<resources.java.Extensions.ExtensionsTest>.ExtensionWriter extensionWriter =
           newExtensionWriter();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -85,7 +85,7 @@ public final class Extensions {
     
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
+        size += com.google.protobuf2.CodedOutputStream
           .computeInt32Size(1, foo_);
       }
       size += extensionsSerializedSize();
@@ -101,25 +101,25 @@ public final class Extensions {
     }
     
     public static resources.java.Extensions.ExtensionsTest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        com.google.protobuf2.ByteString data)
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
     public static resources.java.Extensions.ExtensionsTest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        com.google.protobuf2.ByteString data,
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
     public static resources.java.Extensions.ExtensionsTest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
     public static resources.java.Extensions.ExtensionsTest parseFrom(
         byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf2.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
@@ -129,7 +129,7 @@ public final class Extensions {
     }
     public static resources.java.Extensions.ExtensionsTest parseFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
@@ -145,7 +145,7 @@ public final class Extensions {
     }
     public static resources.java.Extensions.ExtensionsTest parseDelimitedFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
@@ -155,13 +155,13 @@ public final class Extensions {
       }
     }
     public static resources.java.Extensions.ExtensionsTest parseFrom(
-        com.google.protobuf.CodedInputStream input)
+        com.google.protobuf2.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
     public static resources.java.Extensions.ExtensionsTest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        com.google.protobuf2.CodedInputStream input,
+        com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
@@ -175,7 +175,7 @@ public final class Extensions {
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageLite.ExtendableBuilder<
+        com.google.protobuf2.GeneratedMessageLite.ExtendableBuilder<
           resources.java.Extensions.ExtensionsTest, Builder> implements resources.java.Extensions.ExtensionsTestOrBuilder {
       // Construct using resources.generated.Extensions.ExtensionsTest.newBuilder()
       private Builder() {
@@ -212,7 +212,7 @@ public final class Extensions {
       }
       
       private resources.java.Extensions.ExtensionsTest buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
+          throws com.google.protobuf2.InvalidProtocolBufferException {
         resources.java.Extensions.ExtensionsTest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
@@ -255,8 +255,8 @@ public final class Extensions {
       }
       
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          com.google.protobuf2.CodedInputStream input,
+          com.google.protobuf2.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         while (true) {
           int tag = input.readTag();
@@ -316,16 +316,16 @@ public final class Extensions {
   
   public static final int FOOEXTENDED_FIELD_NUMBER = 100;
   public static final
-    com.google.protobuf.GeneratedMessageLite.GeneratedExtension<
+    com.google.protobuf2.GeneratedMessageLite.GeneratedExtension<
       resources.java.Extensions.ExtensionsTest,
-      java.lang.Integer> fooExtended = com.google.protobuf.GeneratedMessageLite
+      java.lang.Integer> fooExtended = com.google.protobuf2.GeneratedMessageLite
           .newSingularGeneratedExtension(
         resources.java.Extensions.ExtensionsTest.getDefaultInstance(),
         5,
         null,
         null,
         100,
-        com.google.protobuf.WireFormat.FieldType.INT32);
+        com.google.protobuf2.WireFormat.FieldType.INT32);
   
   static {
   }

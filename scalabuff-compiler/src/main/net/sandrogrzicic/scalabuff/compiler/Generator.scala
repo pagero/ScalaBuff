@@ -1,33 +1,38 @@
 package net.sandrogrzicic.scalabuff.compiler
 
-import annotation.tailrec
-import collection.mutable
-import net.sandrogrzicic.scalabuff.compiler.FieldTypes._
-import com.google.protobuf2._
 import java.io.File
 
-/**
- * Scala class generator.
- * @author Sandro Gržičić
- */
+import com.google.protobuf2._
+import net.sandrogrzicic.scalabuff.compiler.FieldTypes._
 
-class Generator protected (sourceName: String, importedSymbols: Map[String, ImportedSymbol], generateJsonMethod: Boolean,
-                           targetScalaVersion: Option[String]) {
+import scala.annotation.tailrec
+import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
+
+/**
+  * Scala class generator.
+  *
+  * @author Sandro Gržičić
+  */
+
+class Generator protected(sourceName: String, importedSymbols: Map[String, ImportedSymbol], generateJsonMethod: Boolean,
+                          targetScalaVersion: Option[String]) {
+
   import Generator._
 
-  protected val imports = mutable.ListBuffer[String]()
+  protected val imports: ListBuffer[String] = mutable.ListBuffer[String]()
 
   protected var packageName: String = ""
   protected var className: String = sourceName.takeUntilFirst('.').camelCase
 
   /**
-   * Whether to optimize the resultant class for speed (true) or for code size (false). True by default.
-   */
+    * Whether to optimize the resultant class for speed (true) or for code size (false). True by default.
+    */
   protected var optimizeForSpeed = true
 
   /**
-   * Generates the Scala class code.
-   */
+    * Generates the Scala class code.
+    */
   protected def generate(tree: List[Node]): ScalaClass = {
 
     // *******************
@@ -35,8 +40,8 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
     // *******************
 
     /**
-     * Enum generation
-     */
+      * Enum generation
+      */
     def enum(enum: EnumStatement, indentLevel: Int = 0) = {
       val indentOuter = BuffedString.indent(indentLevel)
       val indent = indentOuter + "\t"
@@ -90,13 +95,12 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
     }
 
     /**
-     * Message generation, recurses for nested messages.
-     * Not tail-recursive, but shouldn't cause stack overflows on sane nesting levels.
-     */
+      * Message generation, recurses for nested messages.
+      * Not tail-recursive, but shouldn't cause stack overflows on sane nesting levels.
+      */
     def message(name: String, body: MessageBody, indentLevel: Int = 0): String = {
-      import FieldLabels.{ REQUIRED, OPTIONAL, REPEATED }
-      import FieldTypes.{ INT32, UINT32, SINT32, FIXED32, SFIXED32, INT64, UINT64, SINT64, FIXED64, SFIXED64, BOOL, FLOAT, DOUBLE, BYTES, STRING }
-      import WireFormat.{ WIRETYPE_VARINT, WIRETYPE_FIXED32, WIRETYPE_FIXED64, WIRETYPE_LENGTH_DELIMITED, WIRETYPE_START_GROUP, WIRETYPE_END_GROUP }
+      import FieldLabels.{OPTIONAL, REPEATED, REQUIRED}
+      import WireFormat.WIRETYPE_LENGTH_DELIMITED
 
       val indent0 = BuffedString.indent(indentLevel)
       val (indent1, indent2, indent3, indent4) = (indent0 + "\t", indent0 + "\t\t", indent0 + "\t\t\t", indent0 + "\t\t\t\t")
@@ -132,7 +136,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
           case _ => // "missing combination <local child>"
         }
       }
-      if (!fields.isEmpty) out.length -= 2
+      if (fields.nonEmpty) out.length -= 2
 
       out.append('\n').append(indent0).append(") extends com.google.protobuf2.")
       if (!hasExtensionRanges) {
@@ -148,6 +152,17 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
       out.append('\n').append(indent1).append("with net.sandrogrzicic.scalabuff.Parser[").append(name).append("]")
 
       out.append(" {\n\n")
+
+      out.append(indent1).append(
+        """
+          |
+          |def escape(raw: Any): String = {
+          |  import scala.reflect.runtime.universe._
+          |  Literal(Constant(raw)).toString
+          |}
+          |
+          """.stripMargin)
+
 
       // setters
       for (field <- fields) {
@@ -175,7 +190,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
         field.label match {
           case OPTIONAL => out.append("None")
           case REPEATED => out.append("Vector.empty[").append(field.fType.scalaType).append("]")
-          case _        => // don't generate a clearer for REQUIRED fields -> would result in an illegal message
+          case _ => // don't generate a clearer for REQUIRED fields -> would result in an illegal message
         }
         out.append(")\n")
       }
@@ -194,7 +209,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
             .append("output.write").append(field.fType.name).append("(")
             .append(field.number).append(", ").append(field.name.toScalaIdent).append(".get)\n")
           case REPEATED =>
-            (field.fType.packable, field.options.filter(value => value.key == "packed" && value.value == "true").headOption) match {
+            (field.fType.packable, field.options.find(value => value.key == "packed" && value.value == "true")) match {
               case (true, Some(option)) =>
                 out.append(indent2).append(s"// write field ${field.name} packed \n")
                 out.append(indent2).append("if (!").append(field.name.toScalaIdent).append(".isEmpty) {\n")
@@ -246,7 +261,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
                 val tagSize = CodedOutputStream.computeTagSize(field.number)
                 out.append(indent3).append(s"__size += $tagSize + computeInt32SizeNoTag(dataSize) + dataSize\n")
                 out.append(indent2).append("}\n")
-              case _            =>
+              case _ =>
                 out.append(indent2).append("for (_v <- ")
                   .append(field.name.toScalaIdent).append(") ")
                   .append("__size += compute").append(field.fType.name).append("Size(")
@@ -288,7 +303,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
         if (field.label == REPEATED) out.append(": _*)")
         out.append(",\n")
       }
-      if (!fields.isEmpty) out.length -= 2
+      if (fields.nonEmpty) out.length -= 2
       out.append("\n")
       out.append(indent2).append(")\n")
         .append(indent2).append("while (true) in.readTag match {\n")
@@ -297,7 +312,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
       for (field <- fields) {
         isOptional = field.label match {
           case OPTIONAL => true
-          case _        => false
+          case _ => false
         }
         out.append(indent3).append("case ").append((field.number << 3) | field.fType.wireType).append(" => ")
         out.append(field.name.toTemporaryIdent).append(" ")
@@ -305,7 +320,8 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
         if (field.label == REPEATED) out.append("+")
         out.append("= ")
         if (isOptional) out.append("Some(")
-        if (field.fType == WIRETYPE_LENGTH_DELIMITED) out.append("in.readBytes()")
+        if (field.fType == WIRETYPE_LENGTH_DELIMITED)
+          out.append("in.readBytes()")
         else if (field.fType.isEnum) {
           // IFF this is an optional field, AND it has a default (i.e. is not
           // None), then fall back to using that default if an exception is
@@ -335,9 +351,9 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
           out.append(", _emptyRegistry)")
 
         } else out.append("in.read").append(field.fType.name).append("()")
-        if(isOptional) out.append(")")
+        if (isOptional) out.append(")")
         out.append("\n")
-        
+
         if (field.fType.packable && field.label == REPEATED) {
           out.append(indent3).append("case ").append((field.number << 3) | WIRETYPE_LENGTH_DELIMITED).append(" => ")
           out.append("\n")
@@ -376,7 +392,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
           case _ => // "missing combination <local child>"
         }
       }
-      if (!fields.isEmpty) out.length -= 2
+      if (fields.nonEmpty) out.length -= 2
       out.append("\n").append(indent2).append(")\n")
       out.append(indent1).append("}\n")
 
@@ -406,37 +422,42 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
       // toJson
       if (generateJsonMethod) {
         out
-        .append(indent1).append("def toJson(indent: Int = 0): String = {\n")
+          .append(indent1).append("def toJson(indent: Int = 0): String = {\n")
           .append(indent2).append("val indent0 = \"\\n\" + (\"\\t\" * indent)\n")
           .append(indent2).append("val (indent1, indent2) = (indent0 + \"\\t\", indent0 + \"\\t\\t\")\n")
           .append(indent2).append("val sb = StringBuilder.newBuilder\n")
           .append(indent2).append("sb\n")
           .append(indent3).append(".append(\"{\")\n")
 
-          for (field <- fields) {
-            val name = field.name.lowerCamelCase
-            val (quotesStart, quotesEnd) = if (!field.fType.isMessage) (".append(\"\\\"\")", ".append(\"\\\"\")") else ("", "")
-            val mapQuotes = if (!field.fType.isMessage) ".map(\"\\\"\" + _ + \"\\\"\")" else ""
-            val toJson = if (field.fType.isMessage) ".toJson(indent + 1)" else ""
-            val mapToJson = if (field.fType.isMessage) ".map(_.toJson(indent + 1))" else ""
+        for (field <- fields) {
+          val name = field.name.lowerCamelCase
+          val (quotesStart, quotesEnd) = if (!field.fType.isMessage) (".append(\"\\\"\")", ".append(\"\\\"\")") else ("", "")
+          val mapQuotes = if (!field.fType.isMessage) ".map(\"\\\"\" + _ + \"\\\"\")" else ""
+          val toJson = if (field.fType.isMessage) ".toJson(indent + 1)" else ""
+          val mapToJson = if (field.fType.isMessage) ".map(_.toJson(indent + 1))" else ""
 
-            field.label match {
-              case REQUIRED =>
-                out.append(indent3).append("sb.append(indent1).append(\"\\\"").append(name)
-                     .append("\\\": \")").append(quotesStart).append(".append(`").append(name)
-                     .append("`").append(toJson).append(")").append(quotesEnd).append(".append(',')").append('\n')
-              case OPTIONAL =>
-                out.append(indent3)
-                     .append("if (`").append(name).append("`.isDefined) { ").append("sb.append(indent1).append(\"\\\"").append(name)
-                     .append("\\\": \")").append(quotesStart).append(".append(`").append(name)
-                     .append("`.get").append(toJson).append(")").append(quotesEnd).append(".append(',') }").append('\n')
-              case REPEATED =>
-                out.append(indent3).append("sb.append(indent1).append(\"\\\"").append(name).append("\\\": [\")")
-                     .append(".append(indent2).append(`").append(name).append("`").append(mapToJson).append(mapQuotes)
-                     .append(".mkString(\", \" + indent2)).append(indent1).append(']').append(',')").append('\n')
-              case _ =>
-            }
+          field.label match {
+            case REQUIRED =>
+              out.append(indent3).append("sb.append(indent1).append(\"\\\"").append(name)
+                .append("\\\": \")").append(quotesStart).append(".append(`").append(name)
+                .append("`").append(toJson).append(")").append(quotesEnd).append(".append(',')").append('\n')
+            case OPTIONAL if field.fType.scalaType == "String" =>
+              out.append(indent3)
+                .append("if (`").append(name).append("`.isDefined) { ").append("sb.append(indent1).append(\"\\\"").append(name)
+                .append("\\\": \")").append(".append(escape(`").append(name)
+                .append("`.get)").append(toJson).append(")").append(".append(',') }").append('\n')
+            case OPTIONAL =>
+              out.append(indent3)
+                .append("if (`").append(name).append("`.isDefined) { ").append("sb.append(indent1).append(\"\\\"").append(name)
+                .append("\\\": \")").append(quotesStart).append(".append(`").append(name)
+                .append("`.get").append(toJson).append(")").append(quotesEnd).append(".append(',') }").append('\n')
+            case REPEATED =>
+              out.append(indent3).append("sb.append(indent1).append(\"\\\"").append(name).append("\\\": [\")")
+                .append(".append(indent2).append(`").append(name).append("`").append(mapToJson).append(mapQuotes)
+                .append(".mkString(\", \" + indent2)).append(indent1).append(']').append(',')").append('\n')
+            case _ =>
           }
+        }
         out.append(indent2).append("if (sb.last.equals(',')) sb.length -= 1\n")
         out.append(indent2).append("sb.append(indent0).append(\"}\")\n")
 
@@ -511,8 +532,8 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
     }
 
     /**
-     * Recursively traverse the tree.
-     */
+      * Recursively traverse the tree.
+      */
     @tailrec
     def traverse(tree: List[Node], output: StringBuilder = StringBuilder.newBuilder): String = {
       tree match {
@@ -521,19 +542,19 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
         // else, build upon the output and call traverse() again with the tree tail
         case node :: tail =>
           node match {
-            case Message(name, body)    => output.append(message(name, body))
-            case Extension(name, body)  => // very similar to Message
-            case e: EnumStatement       => output.append(enum(e))
-            case ImportStatement(name)  => imports += name
+            case Message(name, body) => output.append(message(name, body))
+            case Extension(name, body) => // very similar to Message
+            case e: EnumStatement => output.append(enum(e))
+            case ImportStatement(name) => imports += name
             case PackageStatement(name) => if (packageName.isEmpty) packageName = name
             case OptionValue(key, value) => key match {
-              case "java_package"         => packageName = value.stripQuotes
+              case "java_package" => packageName = value.stripQuotes
               case "java_outer_classname" => className = value.stripQuotes
               case "optimize_for" => value match {
-                case "SPEED"        => optimizeForSpeed = true
-                case "CODE_SIZE"    => optimizeForSpeed = false
+                case "SPEED" => optimizeForSpeed = true
+                case "CODE_SIZE" => optimizeForSpeed = false
                 case "LITE_RUNTIME" => optimizeForSpeed = true
-                case _              => throw new InvalidOptionValueException(key, value)
+                case _ => throw new InvalidOptionValueException(key, value)
               }
               case _ => // ignore options which aren't recognized
             }
@@ -565,7 +586,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
 
     if (matchingTypeName) {
       throw new GenerationFailureException("Cannot generate valid Scala output because the class name, '%s' for the extension registry class matches the name of one of the messages or enums declared in the .proto.  Please either rename the type or use the java_outer_classname option to specify a different class name for the .proto file.".format(className))
-      }
+    }
 
     val output = StringBuilder.newBuilder
 
@@ -583,13 +604,13 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
     imports.foreach { i =>
       output.append("//import ").append(i).append("\n")
     }
-    if (imports.size > 0) output.append("\n")
+    if (imports.nonEmpty) output.append("\n")
     imports.clear()
 
     // generated output
     output.append(generatedOutput).append("\n")
 
-    val messageNames = tree.collect { case m:Message => m }.map(_.name)
+    val messageNames = tree.collect { case m: Message => m }.map(_.name)
     // outer object
     output
       .append("object ").append(className).append(" {\n")
@@ -617,17 +638,17 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
 
 object Generator {
   /**
-   * Returns a valid Scala class.
-   */
+    * Returns a valid Scala class.
+    */
   def apply(tree: List[Node], sourceName: String, importedSymbols: Map[String, ImportedSymbol], generateJsonMethod: Boolean,
             targetScalaVersion: Option[String]): ScalaClass = {
     new Generator(sourceName, importedSymbols, generateJsonMethod, targetScalaVersion).generate(tree)
   }
 
   /**
-   * Modifies some fields of Message and Enum types so that they can be used properly.
-   * Discovers whether each field type is a Message or an Enum.
-   */
+    * Modifies some fields of Message and Enum types so that they can be used properly.
+    * Discovers whether each field type is a Message or an Enum.
+    */
   protected def recognizeCustomTypes(tree: List[Node], importedSymbols: Map[String, ImportedSymbol]) {
     val (enumNames, customFieldTypes) = getEnumNames(tree)
     fixCustomTypes(tree, enumNames, customFieldTypes, importedSymbols)
@@ -638,7 +659,7 @@ object Generator {
                               tree: List[Node],
                               enumNames: mutable.HashSet[String] = mutable.HashSet.empty[String],
                               customFieldTypes: mutable.ArrayBuffer[FieldTypes.EnumVal] = mutable.ArrayBuffer.empty[FieldTypes.EnumVal]
-                              ): (mutable.HashSet[String], mutable.ArrayBuffer[FieldTypes.EnumVal]) = {
+                            ): (mutable.HashSet[String], mutable.ArrayBuffer[FieldTypes.EnumVal]) = {
 
     for (node <- tree) {
       node match {
@@ -674,7 +695,7 @@ object Generator {
   protected def getAllNestedMessageTypes(tree: List[Node]): Map[Message, List[String]] = {
     val nestedMessages = new mutable.HashMap[Message, List[String]]
     for (node <- tree) node match {
-      case m @ Message(name, body) =>
+      case m@Message(name, body) =>
         for (innerMessage <- body.messages) {
           nestedMessages.put(m, innerMessage.name :: nestedMessages.getOrElse(m, Nil))
         }
@@ -687,12 +708,13 @@ object Generator {
   /** Prepend parent class names to all nested custom field types. */
   val processedFieldTypes = new mutable.HashSet[FieldTypes.EnumVal]()
   val processedEnums = new mutable.HashSet[FieldTypes.EnumVal]()
+
   protected def prependParentClassNames(tree: List[Node], nestedMessageTypes: Map[Message, List[String]]) {
     for (node <- tree) node match {
-      case parent @ Message(parentName, parentBody) =>
+      case parent@Message(parentName, parentBody) =>
         // prepend parent class names to messages
         parentBody.messages.foreach {
-          case child @ Message(_, nestedMessage) =>
+          case child@Message(_, nestedMessage) =>
             val filteredFields = parentBody.fields.withFilter(f => f.fType.isMessage && !processedFieldTypes(f.fType))
             for (field <- filteredFields) {
               val fType = field.fType
@@ -756,19 +778,19 @@ object Generator {
           body.messages.foreach(apply)
           body.fields.foreach { field =>
             val scalaType = if (field.fType.scalaType endsWith ".EnumVal")
-                field.fType.scalaType.split("\\.")(0)
-              else
-                field.fType.scalaType
+              field.fType.scalaType.split("\\.")(0)
+            else
+              field.fType.scalaType
             importedSymbols.filter {
               case (name, symbol) =>
                 val shortName = scalaType.stripPrefix(symbol.protoPackage + ".")
                 name == shortName || shortName.startsWith(name + ".")
             }.foreach {
               case (name, symbol) =>
-	              // namespaces might be empty for imported message types
+                // namespaces might be empty for imported message types
                 val protoPkgPrefix = if (symbol.protoPackage.isEmpty) "" else symbol.protoPackage + "."
                 // Java package defaults to proto package according to spec
-	              val namespacePrefix = if (symbol.packageName.isEmpty) protoPkgPrefix else symbol.packageName + "."
+                val namespacePrefix = if (symbol.packageName.isEmpty) protoPkgPrefix else symbol.packageName + "."
                 field.fType.scalaType = namespacePrefix + field.fType.scalaType.stripPrefix(protoPkgPrefix)
                 field.fType.defaultValue = namespacePrefix + field.fType.defaultValue.stripPrefix(protoPkgPrefix)
             }
@@ -776,6 +798,7 @@ object Generator {
         case _ =>
       }
     }
+
     tree.foreach(apply)
   }
 }
@@ -783,21 +806,21 @@ object Generator {
 case class ImportedSymbol(packageName: String, isEnum: Boolean, protoPackage: String = "")
 
 /**
- * A generated Scala class. The path is relative.
- */
+  * A generated Scala class. The path is relative.
+  */
 case class ScalaClass(body: String, path: String, file: String) {
   assert(path.endsWith(File.separator), "path must end with a " + File.separator)
   assert(!file.contains(File.separator), "file name must not contain a " + File.separator)
 }
 
 /**
- * Thrown when a valid Scala class cannot be generated using the the tree returned from the Parser.
- */
+  * Thrown when a valid Scala class cannot be generated using the the tree returned from the Parser.
+  */
 class GenerationFailureException(message: String) extends RuntimeException(message)
 
 /**
- * Thrown when a Node occurs in an unexpected location in the tree.
- */
+  * Thrown when a Node occurs in an unexpected location in the tree.
+  */
 class UnexpectedNodeException(node: Node, parentNode: Node = null) extends GenerationFailureException(
   "Unexpected child node " + node + (if (parentNode ne null) "found in " + parentNode else "")
 )

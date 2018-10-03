@@ -7,25 +7,32 @@ final case class SimpleRequest (
 	`query`: String = "",
 	`pageNumber`: Option[Int] = None,
 	`resultsPerPage`: Option[Int] = None
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[SimpleRequest]
 	with net.sandrogrzicic.scalabuff.Parser[SimpleRequest] {
 
-	def setPageNumber(_f: Int) = copy(`pageNumber` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setPageNumber(_f: Int) = copy(`pageNumber` = Some(_f))
 	def setResultsPerPage(_f: Int) = copy(`resultsPerPage` = Some(_f))
 
 	def clearPageNumber = copy(`pageNumber` = None)
 	def clearResultsPerPage = copy(`resultsPerPage` = None)
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeString(1, `query`)
 		if (`pageNumber`.isDefined) output.writeInt32(2, `pageNumber`.get)
 		if (`resultsPerPage`.isDefined) output.writeInt32(3, `resultsPerPage`.get)
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeStringSize(1, `query`)
 		if (`pageNumber`.isDefined) __size += computeInt32Size(2, `pageNumber`.get)
@@ -34,8 +41,8 @@ final case class SimpleRequest (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): SimpleRequest = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): SimpleRequest = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __query: String = ""
 		var __pageNumber: Option[Int] = `pageNumber`
 		var __resultsPerPage: Option[Int] = `resultsPerPage`
@@ -68,7 +75,7 @@ final case class SimpleRequest (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -93,7 +100,7 @@ object SimpleRequest {
 
 	def parseFrom(data: Array[Byte]): SimpleRequest = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): SimpleRequest = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): SimpleRequest = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): SimpleRequest = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): SimpleRequest = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[SimpleRequest] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -107,14 +114,14 @@ object SimpleRequest {
 }
 
 object SimpleWithComments {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "SimpleRequest" -> (bytes ⇒ SimpleRequest.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

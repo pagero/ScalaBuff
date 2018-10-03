@@ -4,18 +4,25 @@
 package resources.generated
 
 final case class ComplexMessage (
-	`firstField`: com.google.protobuf.ByteString = com.google.protobuf.ByteString.EMPTY,
+	`firstField`: com.google.protobuf2.ByteString = com.google.protobuf2.ByteString.EMPTY,
 	`secondField`: Option[String] = Some("defaultValueForSecondField"),
 	`nestedOuterField`: Option[ComplexMessage.Nested] = None,
 	`simpleEnumField`: scala.collection.immutable.Seq[ComplexMessage.SimpleEnum.EnumVal] = Vector.empty[ComplexMessage.SimpleEnum.EnumVal],
 	`repeatedStringField`: scala.collection.immutable.Seq[String] = Vector.empty[String],
-	`repeatedBytesField`: scala.collection.immutable.Seq[com.google.protobuf.ByteString] = Vector.empty[com.google.protobuf.ByteString]
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+	`repeatedBytesField`: scala.collection.immutable.Seq[com.google.protobuf2.ByteString] = Vector.empty[com.google.protobuf2.ByteString]
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[ComplexMessage]
 	with net.sandrogrzicic.scalabuff.Parser[ComplexMessage] {
 
-	def setSecondField(_f: String) = copy(`secondField` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setSecondField(_f: String) = copy(`secondField` = Some(_f))
 	def setNestedOuterField(_f: ComplexMessage.Nested) = copy(`nestedOuterField` = Some(_f))
 	def setSimpleEnumField(_i: Int, _v: ComplexMessage.SimpleEnum.EnumVal) = copy(`simpleEnumField` = `simpleEnumField`.updated(_i, _v))
 	def addSimpleEnumField(_f: ComplexMessage.SimpleEnum.EnumVal) = copy(`simpleEnumField` = `simpleEnumField` :+ _f)
@@ -25,18 +32,18 @@ final case class ComplexMessage (
 	def addRepeatedStringField(_f: String) = copy(`repeatedStringField` = `repeatedStringField` :+ _f)
 	def addAllRepeatedStringField(_f: String*) = copy(`repeatedStringField` = `repeatedStringField` ++ _f)
 	def addAllRepeatedStringField(_f: TraversableOnce[String]) = copy(`repeatedStringField` = `repeatedStringField` ++ _f)
-	def setRepeatedBytesField(_i: Int, _v: com.google.protobuf.ByteString) = copy(`repeatedBytesField` = `repeatedBytesField`.updated(_i, _v))
-	def addRepeatedBytesField(_f: com.google.protobuf.ByteString) = copy(`repeatedBytesField` = `repeatedBytesField` :+ _f)
-	def addAllRepeatedBytesField(_f: com.google.protobuf.ByteString*) = copy(`repeatedBytesField` = `repeatedBytesField` ++ _f)
-	def addAllRepeatedBytesField(_f: TraversableOnce[com.google.protobuf.ByteString]) = copy(`repeatedBytesField` = `repeatedBytesField` ++ _f)
+	def setRepeatedBytesField(_i: Int, _v: com.google.protobuf2.ByteString) = copy(`repeatedBytesField` = `repeatedBytesField`.updated(_i, _v))
+	def addRepeatedBytesField(_f: com.google.protobuf2.ByteString) = copy(`repeatedBytesField` = `repeatedBytesField` :+ _f)
+	def addAllRepeatedBytesField(_f: com.google.protobuf2.ByteString*) = copy(`repeatedBytesField` = `repeatedBytesField` ++ _f)
+	def addAllRepeatedBytesField(_f: TraversableOnce[com.google.protobuf2.ByteString]) = copy(`repeatedBytesField` = `repeatedBytesField` ++ _f)
 
 	def clearSecondField = copy(`secondField` = None)
 	def clearNestedOuterField = copy(`nestedOuterField` = None)
 	def clearSimpleEnumField = copy(`simpleEnumField` = Vector.empty[ComplexMessage.SimpleEnum.EnumVal])
 	def clearRepeatedStringField = copy(`repeatedStringField` = Vector.empty[String])
-	def clearRepeatedBytesField = copy(`repeatedBytesField` = Vector.empty[com.google.protobuf.ByteString])
+	def clearRepeatedBytesField = copy(`repeatedBytesField` = Vector.empty[com.google.protobuf2.ByteString])
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeBytes(1, `firstField`)
 		if (`secondField`.isDefined) output.writeString(2, `secondField`.get)
 		if (`nestedOuterField`.isDefined) output.writeMessage(3, `nestedOuterField`.get)
@@ -46,7 +53,7 @@ final case class ComplexMessage (
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeBytesSize(1, `firstField`)
 		if (`secondField`.isDefined) __size += computeStringSize(2, `secondField`.get)
@@ -58,14 +65,14 @@ final case class ComplexMessage (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): ComplexMessage = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
-		var __firstField: com.google.protobuf.ByteString = com.google.protobuf.ByteString.EMPTY
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): ComplexMessage = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+		var __firstField: com.google.protobuf2.ByteString = com.google.protobuf2.ByteString.EMPTY
 		var __secondField: Option[String] = `secondField`
 		var __nestedOuterField: Option[ComplexMessage.Nested] = `nestedOuterField`
 		val __simpleEnumField: scala.collection.mutable.Buffer[ComplexMessage.SimpleEnum.EnumVal] = `simpleEnumField`.toBuffer
 		val __repeatedStringField: scala.collection.mutable.Buffer[String] = `repeatedStringField`.toBuffer
-		val __repeatedBytesField: scala.collection.mutable.Buffer[com.google.protobuf.ByteString] = `repeatedBytesField`.toBuffer
+		val __repeatedBytesField: scala.collection.mutable.Buffer[com.google.protobuf2.ByteString] = `repeatedBytesField`.toBuffer
 
 		def __newMerged = ComplexMessage(
 			__firstField,
@@ -114,7 +121,7 @@ final case class ComplexMessage (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -125,7 +132,7 @@ final case class ComplexMessage (
 		sb
 			.append("{")
 			sb.append(indent1).append("\"firstField\": ").append("\"").append(`firstField`).append("\"").append(',')
-			if (`secondField`.isDefined) { sb.append(indent1).append("\"secondField\": ").append("\"").append(`secondField`.get).append("\"").append(',') }
+			if (`secondField`.isDefined) { sb.append(indent1).append("\"secondField\": ").append(escape(`secondField`.get)).append(',') }
 			if (`nestedOuterField`.isDefined) { sb.append(indent1).append("\"nestedOuterField\": ").append(`nestedOuterField`.get.toJson(indent + 1)).append(',') }
 			sb.append(indent1).append("\"simpleEnumField\": [").append(indent2).append(`simpleEnumField`.map("\"" + _ + "\"").mkString(", " + indent2)).append(indent1).append(']').append(',')
 			sb.append(indent1).append("\"repeatedStringField\": [").append(indent2).append(`repeatedStringField`.map("\"" + _ + "\"").mkString(", " + indent2)).append(indent1).append(']').append(',')
@@ -142,7 +149,7 @@ object ComplexMessage {
 
 	def parseFrom(data: Array[Byte]): ComplexMessage = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): ComplexMessage = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): ComplexMessage = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): ComplexMessage = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): ComplexMessage = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[ComplexMessage] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -168,7 +175,7 @@ object ComplexMessage {
 			case 1 => KEY_NAME
 			case _default => throw new net.sandrogrzicic.scalabuff.UnknownEnumException(_default)
 		}
-		val internalGetValueMap = new com.google.protobuf.Internal.EnumLiteMap[EnumVal] {
+		val internalGetValueMap = new com.google.protobuf2.Internal.EnumLiteMap[EnumVal] {
 			def findValueByNumber(id: Int): EnumVal = valueOf(id)
 		}
 	}
@@ -176,22 +183,29 @@ object ComplexMessage {
 	final case class Nested (
 		`nestedField`: String = "",
 		`nestedEnum`: Option[SimpleEnum.EnumVal] = None
-	) extends com.google.protobuf.GeneratedMessageLite
-		with com.google.protobuf.MessageLite.Builder
+	) extends com.google.protobuf2.GeneratedMessageLite
+		with com.google.protobuf2.MessageLite.Builder
 		with net.sandrogrzicic.scalabuff.Message[Nested]
 		with net.sandrogrzicic.scalabuff.Parser[Nested] {
 
-		def setNestedEnum(_f: SimpleEnum.EnumVal) = copy(`nestedEnum` = Some(_f))
+		
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          		def setNestedEnum(_f: SimpleEnum.EnumVal) = copy(`nestedEnum` = Some(_f))
 
 		def clearNestedEnum = copy(`nestedEnum` = None)
 
-		def writeTo(output: com.google.protobuf.CodedOutputStream) {
+		def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 			output.writeString(1, `nestedField`)
 			if (`nestedEnum`.isDefined) output.writeEnum(2, `nestedEnum`.get)
 		}
 
 		def getSerializedSize = {
-			import com.google.protobuf.CodedOutputStream._
+			import com.google.protobuf2.CodedOutputStream._
 			var __size = 0
 			__size += computeStringSize(1, `nestedField`)
 			if (`nestedEnum`.isDefined) __size += computeEnumSize(2, `nestedEnum`.get)
@@ -199,8 +213,8 @@ object ComplexMessage {
 			__size
 		}
 
-		def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): Nested = {
-			import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+		def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): Nested = {
+			import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 			var __nestedField: String = ""
 			var __nestedEnum: Option[SimpleEnum.EnumVal] = `nestedEnum`
 
@@ -229,7 +243,7 @@ object ComplexMessage {
 		def isInitialized = true
 		def build = this
 		def buildPartial = this
-		def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+		def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 		override def getParserForType = this
 		def newBuilderForType = getDefaultInstanceForType
 		def toBuilder = this
@@ -253,7 +267,7 @@ object ComplexMessage {
 
 		def parseFrom(data: Array[Byte]): Nested = defaultInstance.mergeFrom(data)
 		def parseFrom(data: Array[Byte], offset: Int, length: Int): Nested = defaultInstance.mergeFrom(data, offset, length)
-		def parseFrom(byteString: com.google.protobuf.ByteString): Nested = defaultInstance.mergeFrom(byteString)
+		def parseFrom(byteString: com.google.protobuf2.ByteString): Nested = defaultInstance.mergeFrom(byteString)
 		def parseFrom(stream: java.io.InputStream): Nested = defaultInstance.mergeFrom(stream)
 		def parseDelimitedFrom(stream: java.io.InputStream): Option[Nested] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -268,20 +282,27 @@ object ComplexMessage {
 final case class AnotherMessage (
 	`fieldNested`: ComplexMessage.Nested = ComplexMessage.Nested.defaultInstance,
 	`fieldEnum`: ComplexMessage.SimpleEnum.EnumVal = ComplexMessage.SimpleEnum._UNINITIALIZED
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[AnotherMessage]
 	with net.sandrogrzicic.scalabuff.Parser[AnotherMessage] {
 
+	
 
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+          
+
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeMessage(1, `fieldNested`)
 		output.writeEnum(2, `fieldEnum`)
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeMessageSize(1, `fieldNested`)
 		__size += computeEnumSize(2, `fieldEnum`)
@@ -289,8 +310,8 @@ final case class AnotherMessage (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): AnotherMessage = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): AnotherMessage = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __fieldNested: ComplexMessage.Nested = ComplexMessage.Nested.defaultInstance
 		var __fieldEnum: ComplexMessage.SimpleEnum.EnumVal = ComplexMessage.SimpleEnum._UNINITIALIZED
 
@@ -319,7 +340,7 @@ final case class AnotherMessage (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -343,7 +364,7 @@ object AnotherMessage {
 
 	def parseFrom(data: Array[Byte]): AnotherMessage = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): AnotherMessage = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): AnotherMessage = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): AnotherMessage = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): AnotherMessage = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[AnotherMessage] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -356,15 +377,15 @@ object AnotherMessage {
 }
 
 object Complex {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "ComplexMessage" -> (bytes ⇒ ComplexMessage.parseFrom(bytes)),
 		 "AnotherMessage" -> (bytes ⇒ AnotherMessage.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

@@ -15,19 +15,26 @@ final case class DataTypes (
 	`f64bit2`: Option[Long] = None,
 	`f64bit3`: Option[Double] = None,
 	`lengthDelim1`: Option[String] = None,
-	`lengthDelim2`: Option[com.google.protobuf.ByteString] = None,
+	`lengthDelim2`: Option[com.google.protobuf2.ByteString] = None,
 	`lengthDelim3`: Option[DataTypes.Varint8Enum.EnumVal] = None,
 	`lengthDelim4`: scala.collection.immutable.Seq[Int] = Vector.empty[Int],
 	`lengthDelim5`: scala.collection.immutable.Seq[Int] = Vector.empty[Int],
 	`f32bit1`: Option[Int] = None,
 	`f32bit2`: Option[Int] = None,
 	`f32bit3`: Option[Float] = None
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[DataTypes]
 	with net.sandrogrzicic.scalabuff.Parser[DataTypes] {
 
-	def setVarint2(_f: Long) = copy(`varint2` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setVarint2(_f: Long) = copy(`varint2` = Some(_f))
 	def setVarint3(_f: Int) = copy(`varint3` = Some(_f))
 	def setVarint5(_f: Int) = copy(`varint5` = Some(_f))
 	def setVarint6(_f: Long) = copy(`varint6` = Some(_f))
@@ -36,7 +43,7 @@ final case class DataTypes (
 	def setF64bit2(_f: Long) = copy(`f64bit2` = Some(_f))
 	def setF64bit3(_f: Double) = copy(`f64bit3` = Some(_f))
 	def setLengthDelim1(_f: String) = copy(`lengthDelim1` = Some(_f))
-	def setLengthDelim2(_f: com.google.protobuf.ByteString) = copy(`lengthDelim2` = Some(_f))
+	def setLengthDelim2(_f: com.google.protobuf2.ByteString) = copy(`lengthDelim2` = Some(_f))
 	def setLengthDelim3(_f: DataTypes.Varint8Enum.EnumVal) = copy(`lengthDelim3` = Some(_f))
 	def setLengthDelim4(_i: Int, _v: Int) = copy(`lengthDelim4` = `lengthDelim4`.updated(_i, _v))
 	def addLengthDelim4(_f: Int) = copy(`lengthDelim4` = `lengthDelim4` :+ _f)
@@ -67,7 +74,7 @@ final case class DataTypes (
 	def clearF32bit2 = copy(`f32bit2` = None)
 	def clearF32bit3 = copy(`f32bit3` = None)
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeInt32(1, `varint1`)
 		if (`varint2`.isDefined) output.writeInt64(2, `varint2`.get)
 		if (`varint3`.isDefined) output.writeUInt32(3, `varint3`.get)
@@ -84,7 +91,7 @@ final case class DataTypes (
 		for (_v <- `lengthDelim4`) output.writeInt32(204, _v)
 		// write field length_delim5 packed 
 		if (!`lengthDelim5`.isEmpty) {
-			import com.google.protobuf.CodedOutputStream._
+			import com.google.protobuf2.CodedOutputStream._
 			val dataSize = `lengthDelim5`.map(computeInt32SizeNoTag(_)).sum 
 			output.writeRawVarint32(1626)
 			output.writeRawVarint32(dataSize)
@@ -96,7 +103,7 @@ final case class DataTypes (
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeInt32Size(1, `varint1`)
 		if (`varint2`.isDefined) __size += computeInt64Size(2, `varint2`.get)
@@ -123,8 +130,8 @@ final case class DataTypes (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): DataTypes = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): DataTypes = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __varint1: Int = 0
 		var __varint2: Option[Long] = `varint2`
 		var __varint3: Option[Int] = `varint3`
@@ -136,7 +143,7 @@ final case class DataTypes (
 		var __f64bit2: Option[Long] = `f64bit2`
 		var __f64bit3: Option[Double] = `f64bit3`
 		var __lengthDelim1: Option[String] = `lengthDelim1`
-		var __lengthDelim2: Option[com.google.protobuf.ByteString] = `lengthDelim2`
+		var __lengthDelim2: Option[com.google.protobuf2.ByteString] = `lengthDelim2`
 		var __lengthDelim3: Option[DataTypes.Varint8Enum.EnumVal] = `lengthDelim3`
 		val __lengthDelim4: scala.collection.mutable.Buffer[Int] = `lengthDelim4`.toBuffer
 		val __lengthDelim5: scala.collection.mutable.Buffer[Int] = `lengthDelim5`.toBuffer
@@ -231,7 +238,7 @@ final case class DataTypes (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -251,7 +258,7 @@ final case class DataTypes (
 			if (`f64bit1`.isDefined) { sb.append(indent1).append("\"f64bit1\": ").append("\"").append(`f64bit1`.get).append("\"").append(',') }
 			if (`f64bit2`.isDefined) { sb.append(indent1).append("\"f64bit2\": ").append("\"").append(`f64bit2`.get).append("\"").append(',') }
 			if (`f64bit3`.isDefined) { sb.append(indent1).append("\"f64bit3\": ").append("\"").append(`f64bit3`.get).append("\"").append(',') }
-			if (`lengthDelim1`.isDefined) { sb.append(indent1).append("\"lengthDelim1\": ").append("\"").append(`lengthDelim1`.get).append("\"").append(',') }
+			if (`lengthDelim1`.isDefined) { sb.append(indent1).append("\"lengthDelim1\": ").append(escape(`lengthDelim1`.get)).append(',') }
 			if (`lengthDelim2`.isDefined) { sb.append(indent1).append("\"lengthDelim2\": ").append("\"").append(`lengthDelim2`.get).append("\"").append(',') }
 			if (`lengthDelim3`.isDefined) { sb.append(indent1).append("\"lengthDelim3\": ").append("\"").append(`lengthDelim3`.get).append("\"").append(',') }
 			sb.append(indent1).append("\"lengthDelim4\": [").append(indent2).append(`lengthDelim4`.map("\"" + _ + "\"").mkString(", " + indent2)).append(indent1).append(']').append(',')
@@ -271,7 +278,7 @@ object DataTypes {
 
 	def parseFrom(data: Array[Byte]): DataTypes = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): DataTypes = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): DataTypes = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): DataTypes = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): DataTypes = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[DataTypes] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -312,7 +319,7 @@ object DataTypes {
 			case 1 => ENUM_ONE
 			case _default => throw new net.sandrogrzicic.scalabuff.UnknownEnumException(_default)
 		}
-		val internalGetValueMap = new com.google.protobuf.Internal.EnumLiteMap[EnumVal] {
+		val internalGetValueMap = new com.google.protobuf2.Internal.EnumLiteMap[EnumVal] {
 			def findValueByNumber(id: Int): EnumVal = valueOf(id)
 		}
 	}
@@ -320,14 +327,14 @@ object DataTypes {
 }
 
 object DataTypesTest {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "DataTypes" -> (bytes ⇒ DataTypes.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

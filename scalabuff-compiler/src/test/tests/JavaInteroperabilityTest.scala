@@ -2,7 +2,7 @@ package tests
 
 import org.scalatest.{FunSuite, Matchers}
 import resources.generated._
-import com.google.protobuf._
+import com.google.protobuf2._
 import java.util.Arrays
 
 /**

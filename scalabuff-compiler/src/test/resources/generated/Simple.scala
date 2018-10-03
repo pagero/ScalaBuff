@@ -13,12 +13,19 @@ final case class SimpleTest (
 	`stringDefault`: Option[String] = Some("somestring"),
 	`floatDefault`: Option[Float] = Some(1.0f),
 	`floatNegative`: Option[Float] = Some(-1.0f)
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[SimpleTest]
 	with net.sandrogrzicic.scalabuff.Parser[SimpleTest] {
 
-	def setOptionalField(_f: Float) = copy(`optionalField` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setOptionalField(_f: Float) = copy(`optionalField` = Some(_f))
 	def setRepeatedField(_i: Int, _v: String) = copy(`repeatedField` = `repeatedField`.updated(_i, _v))
 	def addRepeatedField(_f: String) = copy(`repeatedField` = `repeatedField` :+ _f)
 	def addAllRepeatedField(_f: String*) = copy(`repeatedField` = `repeatedField` ++ _f)
@@ -39,7 +46,7 @@ final case class SimpleTest (
 	def clearFloatDefault = copy(`floatDefault` = None)
 	def clearFloatNegative = copy(`floatNegative` = None)
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeInt32(1, `requiredField`)
 		if (`optionalField`.isDefined) output.writeFloat(2, `optionalField`.get)
 		for (_v <- `repeatedField`) output.writeString(3, _v)
@@ -52,7 +59,7 @@ final case class SimpleTest (
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeInt32Size(1, `requiredField`)
 		if (`optionalField`.isDefined) __size += computeFloatSize(2, `optionalField`.get)
@@ -67,8 +74,8 @@ final case class SimpleTest (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): SimpleTest = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): SimpleTest = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __requiredField: Int = 0
 		var __optionalField: Option[Float] = `optionalField`
 		val __repeatedField: scala.collection.mutable.Buffer[String] = `repeatedField`.toBuffer
@@ -125,7 +132,7 @@ final case class SimpleTest (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -141,7 +148,7 @@ final case class SimpleTest (
 			if (`type`.isDefined) { sb.append(indent1).append("\"type\": ").append("\"").append(`type`.get).append("\"").append(',') }
 			if (`int32Default`.isDefined) { sb.append(indent1).append("\"int32Default\": ").append("\"").append(`int32Default`.get).append("\"").append(',') }
 			if (`int32Negative`.isDefined) { sb.append(indent1).append("\"int32Negative\": ").append("\"").append(`int32Negative`.get).append("\"").append(',') }
-			if (`stringDefault`.isDefined) { sb.append(indent1).append("\"stringDefault\": ").append("\"").append(`stringDefault`.get).append("\"").append(',') }
+			if (`stringDefault`.isDefined) { sb.append(indent1).append("\"stringDefault\": ").append(escape(`stringDefault`.get)).append(',') }
 			if (`floatDefault`.isDefined) { sb.append(indent1).append("\"floatDefault\": ").append("\"").append(`floatDefault`.get).append("\"").append(',') }
 			if (`floatNegative`.isDefined) { sb.append(indent1).append("\"floatNegative\": ").append("\"").append(`floatNegative`.get).append("\"").append(',') }
 		if (sb.last.equals(',')) sb.length -= 1
@@ -156,7 +163,7 @@ object SimpleTest {
 
 	def parseFrom(data: Array[Byte]): SimpleTest = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): SimpleTest = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): SimpleTest = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): SimpleTest = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): SimpleTest = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[SimpleTest] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -176,14 +183,14 @@ object SimpleTest {
 }
 
 object Simple {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "SimpleTest" -> (bytes ⇒ SimpleTest.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

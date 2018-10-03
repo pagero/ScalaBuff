@@ -13,26 +13,26 @@ import File.{separator => /}
 
 class ScalaBuffTest extends FunSuite with Matchers {
 
-  val NEWLINE = System.getProperty("line.separator")
+  val NEWLINE: String = System.getProperty("line.separator")
 
   val parsedExtension = ".txt"
 
-  val testSrcDir = "scalabuff-compiler" + / + "src" + / + "test" + /
+  val testSrcDir: String = "scalabuff-compiler" + / + "src" + / + "test" + /
 
-  val protoDir = testSrcDir + "resources" + / + "proto" + /
-  val multiProtoDir = testSrcDir + "resources" + / + "multipleprototests" + /
-  val parsedDir = testSrcDir + "resources" + / + "parsed" + /
-  val resourcesGeneratedDir = "resources" + / + "generated" + /
-  val generatedDir = testSrcDir + resourcesGeneratedDir
+  val protoDir: String = testSrcDir + "resources" + / + "proto" + /
+  val multiProtoDir: String = testSrcDir + "resources" + / + "multipleprototests" + /
+  val parsedDir: String = testSrcDir + "resources" + / + "parsed" + /
+  val resourcesGeneratedDir: String = "resources" + / + "generated" + /
+  val generatedDir: String = testSrcDir + resourcesGeneratedDir
 
   val testProto = "simple"
-  val testProtoGenerated = io.Source.fromFile(new File(generatedDir + testProto.capitalize + ".scala"), "UTF-8").mkString
+  val testProtoGenerated: String = io.Source.fromFile(new File(generatedDir + testProto.capitalize + ".scala"), "UTF-8").mkString
 
   val testProtoMulti = "multi_one"
 
   val testProtoPacked = "packed"
 
-  val outputDir = "scalabuff-compiler" + / + "target" + / + "test" + /
+  val outputDir: String = "scalabuff-compiler" + / + "target" + / + "test" + /
   new File(outputDir).mkdirs()
 
   test("apply: simple .proto file") {
@@ -98,15 +98,15 @@ class ScalaBuffTest extends FunSuite with Matchers {
 
     val outputStream = new ByteArrayOutputStream()
     Console.withOut(new PrintStream(outputStream)) {
-      ScalaBuff.run(Array("-v", "-v", "--scala_out=" + outputDir, "--proto_path=" + multiProtoDir))
-      outputStream.toString("utf-8").split("\n").size should be(2)
+      ScalaBuff.run(Array("-v", "-v", "--generate_json_method", "--scala_out=" + outputDir, "--proto_path=" + multiProtoDir))
+      outputStream.toString("utf-8").split("\n").length should be(2)
     }
 
     for (proto <- protoFiles) {
       val outputFile = new File(outputDir + / + resourcesGeneratedDir + proto.camelCase + ".scala")
       outputFile should be('exists)
       val outputFileSource = io.Source.fromFile(outputFile, "UTF-8")
-      val exampleProtoGenerated = io.Source.fromFile(new File(generatedDir + proto.camelCase + ".scala"), "UTF-8").mkString
+      val exampleProtoGenerated = io.Source.fromFile(new File(outputDir + resourcesGeneratedDir + proto.camelCase + ".scala"), "UTF-8").mkString
       outputFileSource.mkString should equal(exampleProtoGenerated)
       outputFileSource.close()
     }
@@ -119,8 +119,9 @@ class ScalaBuffTest extends FunSuite with Matchers {
         "--proto_path=" + parsedDir, // no proto files here, but we want to make sure multi_one.proto is found
         "--proto_path=" + multiProtoDir,
         "--verbose",
+        "--generate_json_method",
         testProtoMulti + ".proto"))
-      outputStream.toString("utf-8").split("\n").size should be(1)
+      outputStream.toString("utf-8").split("\n").length should be(1)
     }
 
     val outputFile = new File(outputDir + / + resourcesGeneratedDir + testProtoMulti.camelCase + ".scala")
@@ -142,7 +143,7 @@ class ScalaBuffTest extends FunSuite with Matchers {
           "--verbose",
           "--generate_json_method",
           protoFile))
-        outputStream.toString("utf-8").split("\n").size should be(1)
+        outputStream.toString("utf-8").split("\n").length should be(1)
       }
 
       val outputFile =
@@ -181,13 +182,5 @@ class ScalaBuffTest extends FunSuite with Matchers {
       ScalaBuff.run(Array("--scala_out=" + invalidOutputDirectory))
       outputStream.toString("utf-8") should be(Strings.INVALID_OUTPUT_DIRECTORY + invalidOutputDirectory + NEWLINE)
     }
-  }
-
-  test("apply: packed .proto file") {
-
-    val settings = ScalaBuff.Settings(generateJsonMethod = true)
-    val scalaClass: ScalaClass = ScalaBuff(new File(protoDir + testProtoPacked + ".proto"))(settings)
-    // TODO matches
-   //  println(scalaClass)
   }
 }

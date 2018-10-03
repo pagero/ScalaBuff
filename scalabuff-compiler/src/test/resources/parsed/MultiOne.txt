@@ -1,0 +1,1 @@
+List(PackageStatement(resources.generated), OptionValue(optimize_for,LITE_RUNTIME), Message(MutiMessageOne,MessageBody(List(),List(),List(),List(),List(),List(),List())))

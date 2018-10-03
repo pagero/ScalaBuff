@@ -7,12 +7,19 @@ final case class PackedTest (
 	`requiredField`: Int = 0,
 	`optionalField`: Option[Float] = None,
 	`repeatedPackedField`: scala.collection.immutable.Seq[Int] = Vector.empty[Int]
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[PackedTest]
 	with net.sandrogrzicic.scalabuff.Parser[PackedTest] {
 
-	def setOptionalField(_f: Float) = copy(`optionalField` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setOptionalField(_f: Float) = copy(`optionalField` = Some(_f))
 	def setRepeatedPackedField(_i: Int, _v: Int) = copy(`repeatedPackedField` = `repeatedPackedField`.updated(_i, _v))
 	def addRepeatedPackedField(_f: Int) = copy(`repeatedPackedField` = `repeatedPackedField` :+ _f)
 	def addAllRepeatedPackedField(_f: Int*) = copy(`repeatedPackedField` = `repeatedPackedField` ++ _f)
@@ -21,12 +28,12 @@ final case class PackedTest (
 	def clearOptionalField = copy(`optionalField` = None)
 	def clearRepeatedPackedField = copy(`repeatedPackedField` = Vector.empty[Int])
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeInt32(1, `requiredField`)
 		if (`optionalField`.isDefined) output.writeFloat(2, `optionalField`.get)
 		// write field repeated_packed_field packed 
 		if (!`repeatedPackedField`.isEmpty) {
-			import com.google.protobuf.CodedOutputStream._
+			import com.google.protobuf2.CodedOutputStream._
 			val dataSize = `repeatedPackedField`.map(computeInt32SizeNoTag(_)).sum 
 			output.writeRawVarint32(26)
 			output.writeRawVarint32(dataSize)
@@ -35,7 +42,7 @@ final case class PackedTest (
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeInt32Size(1, `requiredField`)
 		if (`optionalField`.isDefined) __size += computeFloatSize(2, `optionalField`.get)
@@ -47,8 +54,8 @@ final case class PackedTest (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): PackedTest = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): PackedTest = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __requiredField: Int = 0
 		var __optionalField: Option[Float] = `optionalField`
 		val __repeatedPackedField: scala.collection.mutable.Buffer[Int] = `repeatedPackedField`.toBuffer
@@ -88,7 +95,7 @@ final case class PackedTest (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
@@ -113,7 +120,7 @@ object PackedTest {
 
 	def parseFrom(data: Array[Byte]): PackedTest = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): PackedTest = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): PackedTest = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): PackedTest = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): PackedTest = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[PackedTest] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -127,14 +134,14 @@ object PackedTest {
 }
 
 object Packed {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "PackedTest" -> (bytes ⇒ PackedTest.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")

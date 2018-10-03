@@ -10,12 +10,19 @@ final case class MultiMessageTwo (
 	`type`: Option[Int] = Some(100),
 	`int32Default`: Option[Int] = Some(100),
 	`stringDefault`: Option[String] = Some("somestring")
-) extends com.google.protobuf.GeneratedMessageLite
-	with com.google.protobuf.MessageLite.Builder
+) extends com.google.protobuf2.GeneratedMessageLite
+	with com.google.protobuf2.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[MultiMessageTwo]
 	with net.sandrogrzicic.scalabuff.Parser[MultiMessageTwo] {
 
-	def setOptionalField(_f: Float) = copy(`optionalField` = Some(_f))
+	
+
+def escape(raw: Any): String = {
+  import scala.reflect.runtime.universe._
+  Literal(Constant(raw)).toString
+}
+
+          	def setOptionalField(_f: Float) = copy(`optionalField` = Some(_f))
 	def setRepeatedField(_i: Int, _v: String) = copy(`repeatedField` = `repeatedField`.updated(_i, _v))
 	def addRepeatedField(_f: String) = copy(`repeatedField` = `repeatedField` :+ _f)
 	def addAllRepeatedField(_f: String*) = copy(`repeatedField` = `repeatedField` ++ _f)
@@ -30,7 +37,7 @@ final case class MultiMessageTwo (
 	def clearInt32Default = copy(`int32Default` = None)
 	def clearStringDefault = copy(`stringDefault` = None)
 
-	def writeTo(output: com.google.protobuf.CodedOutputStream) {
+	def writeTo(output: com.google.protobuf2.CodedOutputStream) {
 		output.writeInt32(1, `requiredField`)
 		if (`optionalField`.isDefined) output.writeFloat(2, `optionalField`.get)
 		for (_v <- `repeatedField`) output.writeString(3, _v)
@@ -40,7 +47,7 @@ final case class MultiMessageTwo (
 	}
 
 	def getSerializedSize = {
-		import com.google.protobuf.CodedOutputStream._
+		import com.google.protobuf2.CodedOutputStream._
 		var __size = 0
 		__size += computeInt32Size(1, `requiredField`)
 		if (`optionalField`.isDefined) __size += computeFloatSize(2, `optionalField`.get)
@@ -52,8 +59,8 @@ final case class MultiMessageTwo (
 		__size
 	}
 
-	def mergeFrom(in: com.google.protobuf.CodedInputStream, extensionRegistry: com.google.protobuf.ExtensionRegistryLite): MultiMessageTwo = {
-		import com.google.protobuf.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
+	def mergeFrom(in: com.google.protobuf2.CodedInputStream, extensionRegistry: com.google.protobuf2.ExtensionRegistryLite): MultiMessageTwo = {
+		import com.google.protobuf2.ExtensionRegistryLite.{getEmptyRegistry => _emptyRegistry}
 		var __requiredField: Int = 0
 		var __optionalField: Option[Float] = `optionalField`
 		val __repeatedField: scala.collection.mutable.Buffer[String] = `repeatedField`.toBuffer
@@ -98,11 +105,27 @@ final case class MultiMessageTwo (
 	def isInitialized = true
 	def build = this
 	def buildPartial = this
-	def parsePartialFrom(cis: com.google.protobuf.CodedInputStream, er: com.google.protobuf.ExtensionRegistryLite) = mergeFrom(cis, er)
+	def parsePartialFrom(cis: com.google.protobuf2.CodedInputStream, er: com.google.protobuf2.ExtensionRegistryLite) = mergeFrom(cis, er)
 	override def getParserForType = this
 	def newBuilderForType = getDefaultInstanceForType
 	def toBuilder = this
-	def toJson(indent: Int = 0): String = "ScalaBuff JSON generation not enabled. Use --generate_json_method to enable."
+	def toJson(indent: Int = 0): String = {
+		val indent0 = "\n" + ("\t" * indent)
+		val (indent1, indent2) = (indent0 + "\t", indent0 + "\t\t")
+		val sb = StringBuilder.newBuilder
+		sb
+			.append("{")
+			sb.append(indent1).append("\"requiredField\": ").append("\"").append(`requiredField`).append("\"").append(',')
+			if (`optionalField`.isDefined) { sb.append(indent1).append("\"optionalField\": ").append("\"").append(`optionalField`.get).append("\"").append(',') }
+			sb.append(indent1).append("\"repeatedField\": [").append(indent2).append(`repeatedField`.map("\"" + _ + "\"").mkString(", " + indent2)).append(indent1).append(']').append(',')
+			if (`type`.isDefined) { sb.append(indent1).append("\"type\": ").append("\"").append(`type`.get).append("\"").append(',') }
+			if (`int32Default`.isDefined) { sb.append(indent1).append("\"int32Default\": ").append("\"").append(`int32Default`.get).append("\"").append(',') }
+			if (`stringDefault`.isDefined) { sb.append(indent1).append("\"stringDefault\": ").append(escape(`stringDefault`.get)).append(',') }
+		if (sb.last.equals(',')) sb.length -= 1
+		sb.append(indent0).append("}")
+		sb.toString()
+	}
+
 }
 
 object MultiMessageTwo {
@@ -110,7 +133,7 @@ object MultiMessageTwo {
 
 	def parseFrom(data: Array[Byte]): MultiMessageTwo = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): MultiMessageTwo = defaultInstance.mergeFrom(data, offset, length)
-	def parseFrom(byteString: com.google.protobuf.ByteString): MultiMessageTwo = defaultInstance.mergeFrom(byteString)
+	def parseFrom(byteString: com.google.protobuf2.ByteString): MultiMessageTwo = defaultInstance.mergeFrom(byteString)
 	def parseFrom(stream: java.io.InputStream): MultiMessageTwo = defaultInstance.mergeFrom(stream)
 	def parseDelimitedFrom(stream: java.io.InputStream): Option[MultiMessageTwo] = defaultInstance.mergeDelimitedFromStream(stream)
 
@@ -127,14 +150,14 @@ object MultiMessageTwo {
 }
 
 object MultiTwo {
-	def registerAllExtensions(registry: com.google.protobuf.ExtensionRegistryLite) {
+	def registerAllExtensions(registry: com.google.protobuf2.ExtensionRegistryLite) {
 	}
 
-	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf.GeneratedMessageLite](
+	private val fromBinaryHintMap = collection.immutable.HashMap[String, Array[Byte] ⇒ com.google.protobuf2.GeneratedMessageLite](
 		 "MultiMessageTwo" -> (bytes ⇒ MultiMessageTwo.parseFrom(bytes))
 	)
 
-	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf.GeneratedMessageLite = {
+	def deserializePayload(payload: Array[Byte], payloadType: String): com.google.protobuf2.GeneratedMessageLite = {
 		fromBinaryHintMap.get(payloadType) match {
 			case Some(f) ⇒ f(payload)
 			case None    ⇒ throw new IllegalArgumentException(s"unimplemented deserialization of message payload of type [${payloadType}]")
