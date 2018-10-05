@@ -28,9 +28,9 @@ object UpdateTestResources extends App {
       def accept(filtered: File): Boolean = filtered.getName.endsWith(protoExtension)
     }
 
-    val testDir = "scalabuff-compiler" + / + "src" + / + "test" + /
+    val testDir = "scalabuff-compiler" + / + "src" + / + "test" + / + "scala" + /
 
-    val parsedDir = testDir + "resources" + / + "parsed" + /
+    val parsedDir = "scalabuff-compiler" + / + "src" + / + "test" + / + "resources" + / + "parsed" + /
 
     val protoDirFile = new File(testDir + "resources" + / + "proto" + /)
     val multiDirFile = new File(testDir + "resources" + / + "multipleprototests" + /)

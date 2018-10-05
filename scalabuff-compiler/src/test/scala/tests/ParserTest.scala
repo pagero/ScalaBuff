@@ -17,7 +17,7 @@ class ParserTest extends FunSuite with Matchers {
 	}
 
 	val parsedExtension = ".txt"
-	val protoDir = new File("scalabuff-compiler" + / + "src" + / + "test" + / + "resources" + / + "proto" + /)
+	val protoDir = new File("scalabuff-compiler" + / + "src" + / + "test" + / + "scala" + / + "resources" + / + "proto" + /)
 	val parsedDir = "scalabuff-compiler" + / + "src" + / + "test" + / + "resources" + / + "parsed" + /
 
 	/*

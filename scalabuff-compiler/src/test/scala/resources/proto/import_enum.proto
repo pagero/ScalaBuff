@@ -3,5 +3,5 @@ package resources.generated;
 import "enum_to_import.proto";
 
 message AnImportEnumMessage {
-    required resources.generated.nested.AnEnumToImport to_import = 1;
+    required AnEnumToImport to_import = 1;
 }

@@ -7,7 +7,7 @@ public final class Extensions {
   private Extensions() {}
   public static void registerAllExtensions(
       com.google.protobuf2.ExtensionRegistryLite registry) {
-    registry.add(resources.java.Extensions.fooExtended);
+    registry.add(fooExtended);
   }
   public interface ExtensionsTestOrBuilder extends 
        com.google.protobuf2.GeneratedMessageLite.
@@ -177,7 +177,7 @@ public final class Extensions {
     public static final class Builder extends
         com.google.protobuf2.GeneratedMessageLite.ExtendableBuilder<
           resources.java.Extensions.ExtensionsTest, Builder> implements resources.java.Extensions.ExtensionsTestOrBuilder {
-      // Construct using resources.generated.Extensions.ExtensionsTest.newBuilder()
+      // Construct using Extensions.ExtensionsTest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -200,7 +200,7 @@ public final class Extensions {
       }
       
       public resources.java.Extensions.ExtensionsTest getDefaultInstanceForType() {
-        return resources.java.Extensions.ExtensionsTest.getDefaultInstance();
+        return getDefaultInstance();
       }
       
       public resources.java.Extensions.ExtensionsTest build() {
@@ -234,7 +234,7 @@ public final class Extensions {
       }
       
       public Builder mergeFrom(resources.java.Extensions.ExtensionsTest other) {
-        if (other == resources.java.Extensions.ExtensionsTest.getDefaultInstance()) return this;
+        if (other == getDefaultInstance()) return this;
         if (other.hasFoo()) {
           setFoo(other.getFoo());
         }
@@ -303,7 +303,7 @@ public final class Extensions {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:resources.generated.ExtensionsTest)
+      // @@protoc_insertion_point(builder_scope:ExtensionsTest)
     }
     
     static {
@@ -311,7 +311,7 @@ public final class Extensions {
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:resources.generated.ExtensionsTest)
+    // @@protoc_insertion_point(class_scope:ExtensionsTest)
   }
   
   public static final int FOOEXTENDED_FIELD_NUMBER = 100;

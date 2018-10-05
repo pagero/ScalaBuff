@@ -297,7 +297,7 @@ public final class Complex {
           com.google.protobuf2.GeneratedMessageLite.Builder<
             resources.java.Complex.ComplexMessage.Nested, Builder>
           implements resources.java.Complex.ComplexMessage.NestedOrBuilder {
-        // Construct using resources.java.Complex.ComplexMessage.Nested.newBuilder()
+        // Construct using resources.Complex.ComplexMessage.Nested.newBuilder()
         private Builder() {
           maybeForceBuilderInitialization();
         }
@@ -322,7 +322,7 @@ public final class Complex {
         }
         
         public resources.java.Complex.ComplexMessage.Nested getDefaultInstanceForType() {
-          return resources.java.Complex.ComplexMessage.Nested.getDefaultInstance();
+          return getDefaultInstance();
         }
         
         public resources.java.Complex.ComplexMessage.Nested build() {
@@ -360,7 +360,7 @@ public final class Complex {
         }
         
         public Builder mergeFrom(resources.java.Complex.ComplexMessage.Nested other) {
-          if (other == resources.java.Complex.ComplexMessage.Nested.getDefaultInstance()) return this;
+          if (other == getDefaultInstance()) return this;
           if (other.hasNestedField()) {
             setNestedField(other.getNestedField());
           }
@@ -764,7 +764,7 @@ public final class Complex {
         com.google.protobuf2.GeneratedMessageLite.Builder<
           resources.java.Complex.ComplexMessage, Builder>
         implements resources.java.Complex.ComplexMessageOrBuilder {
-      // Construct using resources.java.Complex.ComplexMessage.newBuilder()
+      // Construct using resources.Complex.ComplexMessage.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -797,7 +797,7 @@ public final class Complex {
       }
       
       public resources.java.Complex.ComplexMessage getDefaultInstanceForType() {
-        return resources.java.Complex.ComplexMessage.getDefaultInstance();
+        return getDefaultInstance();
       }
       
       public resources.java.Complex.ComplexMessage build() {
@@ -855,7 +855,7 @@ public final class Complex {
       }
       
       public Builder mergeFrom(resources.java.Complex.ComplexMessage other) {
-        if (other == resources.java.Complex.ComplexMessage.getDefaultInstance()) return this;
+        if (other == getDefaultInstance()) return this;
         if (other.hasFirstField()) {
           setFirstField(other.getFirstField());
         }
@@ -1446,7 +1446,7 @@ public final class Complex {
         com.google.protobuf2.GeneratedMessageLite.Builder<
           resources.java.Complex.AnotherMessage, Builder>
         implements resources.java.Complex.AnotherMessageOrBuilder {
-      // Construct using resources.java.Complex.AnotherMessage.newBuilder()
+      // Construct using resources.Complex.AnotherMessage.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1471,7 +1471,7 @@ public final class Complex {
       }
       
       public resources.java.Complex.AnotherMessage getDefaultInstanceForType() {
-        return resources.java.Complex.AnotherMessage.getDefaultInstance();
+        return getDefaultInstance();
       }
       
       public resources.java.Complex.AnotherMessage build() {
@@ -1509,7 +1509,7 @@ public final class Complex {
       }
       
       public Builder mergeFrom(resources.java.Complex.AnotherMessage other) {
-        if (other == resources.java.Complex.AnotherMessage.getDefaultInstance()) return this;
+        if (other == getDefaultInstance()) return this;
         if (other.hasFieldNested()) {
           mergeFieldNested(other.getFieldNested());
         }

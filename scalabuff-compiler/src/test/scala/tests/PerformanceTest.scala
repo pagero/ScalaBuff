@@ -15,7 +15,7 @@ class PerformanceTest extends FunSuite with Matchers {
   val WARMUP_COUNT = 20
   val REPEAT_COUNT = 20
 
-  val protoDir = "scalabuff-compiler" + / + "src" + / + "test" + / + "resources" + / + "proto" + /
+  val protoDir = "scalabuff-compiler" + / + "src" + / + "test" + / + "scala" + / + "resources" + / + "proto" + /
   val protoDirFile = new File(protoDir)
 
   val protoFileFilter = new FileFilter {

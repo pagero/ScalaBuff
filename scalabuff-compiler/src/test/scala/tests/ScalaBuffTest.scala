@@ -17,12 +17,12 @@ class ScalaBuffTest extends FunSuite with Matchers {
 
   val parsedExtension = ".txt"
 
-  val testSrcDir: String = "scalabuff-compiler" + / + "src" + / + "test" + /
+  val testSrcDir: String = "scalabuff-compiler" + / + "src" + / + "test" + / + "scala" + /
 
   val protoDir: String = testSrcDir + "resources" + / + "proto" + /
   val multiProtoDir: String = testSrcDir + "resources" + / + "multipleprototests" + /
   val parsedDir: String = testSrcDir + "resources" + / + "parsed" + /
-  val resourcesGeneratedDir: String = "resources" + / + "generated" + /
+  val resourcesGeneratedDir: String = "resources/generated" + /
   val generatedDir: String = testSrcDir + resourcesGeneratedDir
 
   val testProto = "simple"
@@ -71,7 +71,7 @@ class ScalaBuffTest extends FunSuite with Matchers {
       outputFileSource.mkString should equal(testProtoGenerated)
       outputFileSource.close()
       outputFile.delete()
-      new File("resources" + / + "generated").delete()
+      new File("resources" + / + "resources/generated").delete()
       new File("resources").delete()
     }
   }
