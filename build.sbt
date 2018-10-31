@@ -13,7 +13,8 @@ lazy val defaultSettings = Seq(
   libraryDependencies ++= Seq(
     "com.google.protobuf2" % "protobuf-java" % "2.5.0-pb2",
     "org.scalatest" %% "scalatest" % "3.0.5" % Test,
-    "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.7"
+    "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.7",
+    "org.scala-lang" % "scala-reflect" % scalaVersion.value
   ),
   scalaVersion := scalaVersionStr,
   crossScalaVersions ++= scalaCrossVersions,
